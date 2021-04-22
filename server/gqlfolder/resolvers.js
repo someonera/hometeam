@@ -1,4 +1,5 @@
-const User = require('../db/schemas')
+const { User, Task }  = require('../db/schemas')
+// const Task  = require('../db/schemas')
 
 const resolvers = {
 
@@ -21,7 +22,26 @@ const resolvers = {
     } catch (err) {
       console.log(err)
     }
-  } 
+  }, 
+
+  getTask: async (obj, args) => {
+    try {
+      const gotTask = await Task.find({taskName: args.taskName});
+      return(gotTask)
+    } catch (err) {
+      console.log(err)
+    }
+  }, 
+
+  getAllTasks: async (obj) => {
+    try {
+      const allTasks = await Task.find({});
+      return allTasks
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
 },
 
   Mutation: {
@@ -33,6 +53,18 @@ const resolvers = {
     } catch (err) {
       console.log(err)
     }
+    }
+  , 
+
+  addTask: async (obj, args) => {
+    try {
+      const addedTask = await Task.create({taskName: args.taskName})
+      console.log(args)
+      return addedTask
+
+    } catch(err) {
+      console.log(err)
+      }
     }
   }
 }

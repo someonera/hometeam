@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { Text, TextInput, View, Button } from 'react-native';
+import { Text, TextInput, View, Button , TouchableOpacity} from 'react-native';
 const styles = require('../styles/styles');
 import {gql, useMutation } from '@apollo/client'
 
@@ -13,17 +13,30 @@ const ADD_NEW_USER = gql `
 
 export function AddTeamMateScreen({route, navigation}) {
   let input; 
-  const [addUser, {data} ] = useMutation(ADD_NEW_USER);
+  const [addUser, {loading, error, data} ] = useMutation(ADD_NEW_USER);
+
+
+  const submit = e => {
+    e.preventDefault();
+    addUser({variables: {name : input}})
+    input = ''
+  }
 
   return (
     <View>
       <Text>New Team Mate: </Text>
+
+
       <TextInput
+        editable = {true}
         style={{height: 40}}
-        placeholder="name"
+        editable = { true }
       />
-      <Button title="ADD" style={styles.box}/>
+      <TouchableOpacity title="ADD" style={styles.box} onPress={submit}>
+        <Text> ADD </Text>
+      </TouchableOpacity>
       
+          
     </View>
   )
   

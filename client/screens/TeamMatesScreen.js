@@ -10,6 +10,10 @@ const GET_ALL_USERS = gql`
   query getAllUsers {
     getAllUsers {
       name
+      tasks {
+        taskName
+      }
+      
     }
   }
 `

@@ -26,7 +26,7 @@ export function HomeScreen({navigation, route}) {
 
       <TouchableOpacity style={styles.box}
         onPress={() => {
-          navigation.navigate('Tasks')
+          navigation.navigate('TasksTabs')
         }} color="1ACDA5#" > 
             <Text>My Goals</Text>
       </TouchableOpacity>

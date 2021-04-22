@@ -10,6 +10,7 @@ const { HomeScreen } = require('./screens/HomeScreen')
 const { TasksScreen } = require('./screens/TasksScreen')
 const { TeamMatesScreen } = require('./screens/TeamMatesScreen')
 const { AddTeamMateScreen } = require('./screens/AddTeamMateScreen')
+const { TaskDetailsScreen } = require('./screens/TaskDetailsScreen')
 
 
 const {screenOptions} = require('./styles/headerstyles')
@@ -23,11 +24,21 @@ const client = new ApolloClient({
 const Stack = createStackNavigator()
 const Tab = createStackNavigator()
 
-function TeamScreens() {
+
+function TeamStack() {
   return (
     <Tab.Navigator>
       <Tab.Screen name ="TeamMates" component={TeamMatesScreen} />
       <Tab.Screen name="AddTeamMate" component={AddTeamMateScreen} />
+    </Tab.Navigator>
+  )
+}
+
+function TasksStack() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name ="Tasks" component={TasksScreen}/>
+      <Tab.Screen name="TaskDetails" component={TaskDetailsScreen}/>
     </Tab.Navigator>
   )
 }
@@ -38,8 +49,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={screenOptions} >
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Tasks" component={TasksScreen} />
-        <Stack.Screen name="TeamMates" component={TeamScreens} />
+        <Stack.Screen name="TasksTabs" component={TasksStack} />
+        <Stack.Screen name="TeamMates" component={TeamStack} />
       </Stack.Navigator>
     </NavigationContainer>
     </ApolloProvider>
