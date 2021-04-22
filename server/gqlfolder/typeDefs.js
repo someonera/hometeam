@@ -10,6 +10,7 @@ type User {
 
 type Query {
   getUser(name:String!): [User!]
+  getAllUsers: [User!]
 }
 
 type Mutation {

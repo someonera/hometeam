@@ -7,11 +7,21 @@ const resolvers = {
       try {
       const gotUser = await User.find({name: args.name});
       console.log(gotUser)
-      return gotUser
+      return gotUser 
     } catch (err) {
       console.log(err)
     }
-  }
+  }, 
+
+  getAllUsers: async (obj) => {
+    try {
+      const allUsers = await User.find({});
+      console.log('hello')
+      return allUsers
+    } catch (err) {
+      console.log(err)
+    }
+  } 
 },
 
   Mutation: {
