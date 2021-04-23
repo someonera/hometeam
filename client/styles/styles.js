@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#57BF08',
     margin: 5,
   },
-  button: {
+  input: {
+    fontSize: 20, 
     
   }
 

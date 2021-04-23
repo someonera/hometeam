@@ -62,7 +62,6 @@ const resolvers = {
 
   addTask: async (obj, args) => {
     try {
-      if (await Task.find({taskName: args.taskName})) return ("a task with this name exists!")
       const addedTask = await Task.create({taskName: args.taskName})
       console.log(args)
       return addedTask

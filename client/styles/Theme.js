@@ -10,10 +10,10 @@ export const theme = {
   Button: {
     raised: false,
     buttonStyle: {
-      width: 150
+      width: 50
     },
     containerStyle: {
-      margin: 2
+      // margin: 2
     }, 
     titleStyle: {
       fontSize:12
@@ -22,7 +22,7 @@ export const theme = {
 
   Header: {
     headerStyle: {
-      backgroundcolor: 'pink'
+      backgroundColor: 'pink'
     }
   }, 
 
@@ -39,6 +39,10 @@ export const theme = {
       margin: 10, 
       borderRadius: 10
     }
+  }, 
+
+  Input: {
+    
   }
 
 

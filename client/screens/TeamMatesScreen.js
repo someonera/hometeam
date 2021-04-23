@@ -28,28 +28,37 @@ export function TeamMatesScreen({routes, navigation}) {
   return (
     <ScrollView>
       <Button
+        buttonStyle={{width: 150}}
         icon={<Icon name="plus"/>}
-        title = "New TeamMate"
+        title = "  New TeamMate"
         onPress={() => {
           navigation.navigate('AddTeamMate')
         }}
-      >
-        <Text>Add A New Team Mate</Text>
-      </Button>
+      />
+    
 
-      <Text> Hello and Welcome </Text>
-      {data.getAllUsers.map(({name, id}) => (
+      {data.getAllUsers.map(({name, id, tasks}) => (
       
       <Card key={id}>
-        <Card.Title>{name}</Card.Title>
+        <Card.Title>
+          {name} 
+        <Button 
+            buttonStyle={{marginLeft: 150}}
+            icon={<Icon name="edit-2"/>}
+          />
+        </Card.Title>
+  
         <Card.Divider/>
         
         <View style={{position:'relative', alignItems:"center"}}> 
           <Icon name="smile" size={30}/>
           <Text>All Time Goals: </Text>
           <Text>MVP Awards: </Text>
-
         </View>
+
+        {/* {tasks.map((task) => {
+          <Text key={task._id}> Current Tasks: {task.taskName}</Text>
+        })} */}
       </Card>
       ))}
     </ScrollView>
