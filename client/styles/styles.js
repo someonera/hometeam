@@ -12,9 +12,14 @@ const styles = StyleSheet.create({
     width: 100,
     height:100,
     padding: 25,
-    backgroundColor: '#1ACDA5',
+    backgroundColor: '#57BF08',
     margin: 5,
   },
+  button: {
+    
+  }
+
 })
 
-module.exports = styles
+
+module.exports = styles 

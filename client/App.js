@@ -5,6 +5,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { createStackNavigator } from '@react-navigation/stack'; 
 import { NavigationContainer } from '@react-navigation/native'
 
+import {ThemeProvider} from 'react-native-elements'
 
 const { HomeScreen } = require('./screens/HomeScreen')
 const { TasksScreen } = require('./screens/TasksScreen')
@@ -13,13 +14,17 @@ const { AddTeamMateScreen } = require('./screens/AddTeamMateScreen')
 const { TaskDetailsScreen } = require('./screens/TaskDetailsScreen')
 
 
-const {screenOptions} = require('./styles/headerstyles')
+const theme = {
+  colors: {
+    primary: 'pink'
+  }
+}
 
+const {screenOptions} = require('./styles/headerstyles')
 
 const client = new ApolloClient({
   uri: 'http://192.168.1.124:4000'
 })
-
 
 const Stack = createStackNavigator()
 const Tab = createStackNavigator()
@@ -46,6 +51,7 @@ function TasksStack() {
 export default function App() {
   return (
     <ApolloProvider client={client}>
+    <ThemeProvider theme={theme}>
     <NavigationContainer>
       <Stack.Navigator screenOptions={screenOptions} >
         <Stack.Screen name="Home" component={HomeScreen} />
@@ -53,6 +59,7 @@ export default function App() {
         <Stack.Screen name="TeamMates" component={TeamStack} />
       </Stack.Navigator>
     </NavigationContainer>
+    </ThemeProvider>
     </ApolloProvider>
   );
 };

@@ -5,11 +5,13 @@ const typeDefs = gql`
 type User {
   name: String
   tasks: [Task!]
+  id: ID
 }
 
 type Task {
   taskName: String
   taskWho: User
+  id: ID
 }
 
 type Query {

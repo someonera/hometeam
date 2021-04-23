@@ -1,14 +1,18 @@
 import React, { useReducer } from 'react';
 import { Text, View , TouchableOpacity} from 'react-native';
-const styles = require('../styles/styles')
-import { gql, useQuery } from '@apollo/client'
 
+
+import { gql, useQuery } from '@apollo/client'
+import { Button } from 'react-native-elements'
+
+const styles = require('../styles/styles')
+const {buttonStyle, containerStyle}= require('../styles/buttonStyles')
 
 const GET_ALL_TASKS = gql`
   query getAllTasks {
     getAllTasks {
       taskName
-
+      id
     }
   }
 `
@@ -23,16 +27,22 @@ export function TasksScreen({route, navigation}) {
   return (
     <View>
 
-      {data.getAllTasks.map(({taskName}) => (
-        <TouchableOpacity key={taskName}
+      {data.getAllTasks.map(({taskName, id}) => (
+        <View> 
+
+          <Text>
+          Goal: {taskName}
+          </Text>
+
+        <Button buttonStyle={buttonStyle} key={id}
         onPress={() => {
           navigation.navigate('TaskDetails')
         }}
         >
-          <Text>
-          Goal: {taskName}
-          </Text>
-        </TouchableOpacity>
+          <Text> Edit </Text>
+        </Button>
+
+        </View>
       ))}
       
     </View>

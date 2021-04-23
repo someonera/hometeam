@@ -10,6 +10,7 @@ const GET_ALL_USERS = gql`
   query getAllUsers {
     getAllUsers {
       name
+      id
       tasks {
         taskName
       }
@@ -33,9 +34,9 @@ export function TeamMatesScreen({routes, navigation}) {
       </TouchableOpacity>
 
       <Text> Hello and Welcome </Text>
-      {data.getAllUsers.map(({name}) => (
+      {data.getAllUsers.map(({name, id}) => (
       
-      <Text key={name}>
+      <Text key={id}>
         name: {name}
       </Text>
       ))}

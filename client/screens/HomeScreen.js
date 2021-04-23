@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { Button, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 const styles = require('../styles/styles')
+import { Button } from 'react-native-elements'
 
 export function HomeScreen({navigation, route}) {
 
@@ -14,7 +15,6 @@ export function HomeScreen({navigation, route}) {
 
   return (
     <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
-
       <TouchableOpacity style={styles.box}
         onPress={() => {
           navigation.navigate('TeamMates')
