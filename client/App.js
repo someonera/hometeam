@@ -5,7 +5,8 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { createStackNavigator } from '@react-navigation/stack'; 
 import { NavigationContainer } from '@react-navigation/native'
 
-import {ThemeProvider} from 'react-native-elements'
+import {ThemeProvider, Button} from 'react-native-elements'
+const { theme } = require('./styles/Theme')
 
 const { HomeScreen } = require('./screens/HomeScreen')
 const { TasksScreen } = require('./screens/TasksScreen')
@@ -13,12 +14,6 @@ const { TeamMatesScreen } = require('./screens/TeamMatesScreen')
 const { AddTeamMateScreen } = require('./screens/AddTeamMateScreen')
 const { TaskDetailsScreen } = require('./screens/TaskDetailsScreen')
 
-
-const theme = {
-  colors: {
-    primary: 'pink'
-  }
-}
 
 const {screenOptions} = require('./styles/headerstyles')
 
@@ -47,6 +42,14 @@ function TasksStack() {
     </Tab.Navigator>
   )
 }
+
+// function GamesStack() {
+//   return (
+//     <Tab.Navigator>
+      
+//     </Tab.Navigator>
+//   )
+// }
 
 export default function App() {
   return (

@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
 const styles = require('../styles/styles')
-import { Button } from 'react-native-elements'
+import { Button, ListItem } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/Feather'
 
 export function HomeScreen({navigation, route}) {
 
@@ -14,27 +15,73 @@ export function HomeScreen({navigation, route}) {
   }, [navigation])
 
   return (
-    <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
-      <TouchableOpacity style={styles.box}
-        onPress={() => {
+    <View>
+      <ListItem
+          Component={TouchableHighlight}
+          onPress={() => {
           navigation.navigate('TeamMates')
         }}
       >
-        <Text>My TeamMates</Text>
-      </TouchableOpacity>
+        <Icon name="user" size={30} color="green"/>
+
+        <ListItem.Content>
+          <ListItem.Title>
+            TeamMates
+          </ListItem.Title>
+          <ListItem.Subtitle>
+            See and Edit Your TeamMates
+          </ListItem.Subtitle>
+        </ListItem.Content>
+      </ListItem>
 
 
-      <TouchableOpacity style={styles.box}
+      <ListItem
+        Component={TouchableOpacity}
         onPress={() => {
           navigation.navigate('TasksTabs')
         }} color="1ACDA5#" > 
-            <Text>My Goals</Text>
-      </TouchableOpacity>
+        <Icon name="dribbble" size={30} color="green"/>
+        <ListItem.Content>
+          <ListItem.Title>
+            Our Goals
+          </ListItem.Title>
 
-      <TouchableOpacity style={styles.box}>
-        <Text>Game</Text>
-      </TouchableOpacity>
-      
+          <ListItem.Subtitle>
+            Add and Edit Your Team Goals
+          </ListItem.Subtitle>
+        </ListItem.Content>
+      </ListItem>
+
+      <ListItem
+        Component={TouchableOpacity}
+      >
+      <Icon name="eye" size={30} color="green"/>
+        <ListItem.Content>
+          <ListItem.Title>
+            Game!
+          </ListItem.Title>
+          <ListItem.Subtitle>
+            See Current Game
+          </ListItem.Subtitle>
+        </ListItem.Content>
+
+      </ListItem>
+
+
+      <ListItem
+        Component={TouchableOpacity}
+      >
+      <Icon name="eye" size={30} color="green"/>
+        <ListItem.Content>
+          <ListItem.Title>
+            Stats!
+          </ListItem.Title>
+          <ListItem.Subtitle>
+            See Past Stats
+          </ListItem.Subtitle>
+        </ListItem.Content>
+
+      </ListItem>
 
     </View>
   )

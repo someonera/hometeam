@@ -1,12 +1,11 @@
 import React, { useReducer } from 'react';
 import { Text, View , TouchableOpacity} from 'react-native';
 
-
+import Icon from 'react-native-vector-icons/Entypo'
 import { gql, useQuery } from '@apollo/client'
 import { Button } from 'react-native-elements'
 
 const styles = require('../styles/styles')
-const {buttonStyle, containerStyle}= require('../styles/buttonStyles')
 
 const GET_ALL_TASKS = gql`
   query getAllTasks {
@@ -34,14 +33,13 @@ export function TasksScreen({route, navigation}) {
           Goal: {taskName}
           </Text>
 
-        <Button buttonStyle={buttonStyle} key={id}
+        <Button key={id} 
+        icon={<Icon name="pencil"/>}
         onPress={() => {
           navigation.navigate('TaskDetails')
         }}
-        >
-          <Text> Edit </Text>
-        </Button>
-
+        />
+    
         </View>
       ))}
       

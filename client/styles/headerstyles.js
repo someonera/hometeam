@@ -2,7 +2,7 @@
 
 export const screenOptions={
   headerStyle: {
-    backgroundColor: '#57BF08',
+    backgroundColor: 'pink',
   },
   headerTintColor: '#fff',
   headerTitleStyle: {

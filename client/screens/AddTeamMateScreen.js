@@ -1,7 +1,8 @@
 import React, { useReducer, useState} from 'react';
-import { Text, TextInput, View, Button , TouchableOpacity} from 'react-native';
+import { Text, TextInput, View , TouchableOpacity} from 'react-native';
 const styles = require('../styles/styles');
 import {gql, useMutation } from '@apollo/client'
+import {Button } from 'react-native-elements'
 
 /// either GET an existing user if you're coming from a user name 
 /// or Have the details blank if you're coming from "Add user"
@@ -39,9 +40,9 @@ export function AddTeamMateScreen({route, navigation}) {
         onChangeText = {setInput} 
       />
 
-      <TouchableOpacity title="ADD" style={styles.box} onPress={submit}>
+      <Button title="ADD"  onPress={submit}>
         <Text> ADD </Text>
-      </TouchableOpacity>
+      </Button>
       
           
     </View>

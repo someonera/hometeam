@@ -10,7 +10,7 @@ type User {
 
 type Task {
   taskName: String
-  taskWho: User
+  taskWho: [User]
   id: ID
 }
 
@@ -22,12 +22,15 @@ type Query {
 }
 
 type Mutation {
+
   addUser(name:String!):User!
   #delete user
 
   addTask(taskName: String!):Task!
   #delete task
-}
 
+  addUsersToTask(taskName: String!, name: String!):Task!
+
+  }
 `
-module.exports = typeDefs
+module.exports= typeDefs
