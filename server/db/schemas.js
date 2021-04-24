@@ -13,7 +13,8 @@ const taskSchema = new mongoose.Schema({
   taskName: String,
   taskWho: Array,
   taskDesc: String, 
-  doDays: Number, 
+  startDate: String,
+  interval: Number, 
 });
 
 const gameSchema = new mongoose.Schema({

@@ -3,7 +3,8 @@ import {TouchableHighlight} from "react-native";
 
 export const theme = {
   colors: {
-    primary: "pink"
+    primary: "pink", 
+    secondary: "green"
   }, 
 
 
@@ -16,7 +17,7 @@ export const theme = {
       // margin: 2
     }, 
     titleStyle: {
-      fontSize:12
+      fontSize:13
     }
   },
 
@@ -40,10 +41,6 @@ export const theme = {
       borderRadius: 10
     }
   }, 
-
-  Input: {
-
-  }
 
 
 };

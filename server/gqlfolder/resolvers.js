@@ -64,8 +64,12 @@ const resolvers = {
     try {
       const taskCheck = await Task.findOne({taskName: args.taskName}); 
       if (!taskCheck) {
-      const addedTask = await Task.create({taskName: args.taskName});
-      console.log(args);
+      const addedTask = await Task.create({
+        taskName: args.taskName, 
+        startDate: args.startDate,
+        interval: args.interval, 
+        taskWho: args.taskWho
+      });
       return addedTask;
       }
     } catch (err) {
@@ -75,10 +79,15 @@ const resolvers = {
 
   editTask: async (obj, args) => {
     try {
-      console.log("args", args); 
       const taskCheck = await Task.findOne({_id: args.id}); 
       if (taskCheck) {
-        const editedTask = await Task.findByIdAndUpdate(taskCheck.id, {taskName: args.taskName}); 
+        const editedTask = await Task.findByIdAndUpdate(taskCheck.id, {
+          startDate: (args.startDate ? args.startDate : taskCheck.startDate), 
+          taskName: (args.taskName ? args.taskName : taskCheck.taskName), 
+          interval: (args.interval ? args.interval : taskCheck.interval), 
+          taskWho: (args.taskWho ? args.taskWho : taskCheck.taskWho)
+        }
+        ); 
         return editedTask; 
       }
     } catch (err) {

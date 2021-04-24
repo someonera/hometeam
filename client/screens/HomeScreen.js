@@ -58,10 +58,10 @@ export function HomeScreen({navigation, route}) {
       <Icon name="eye" size={30} color="green"/>
         <ListItem.Content>
           <ListItem.Title>
-            Game!
+            This Week's Match
           </ListItem.Title>
           <ListItem.Subtitle>
-            See Current Game
+            This Week's Match
           </ListItem.Subtitle>
         </ListItem.Content>
 

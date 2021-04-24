@@ -3,7 +3,7 @@ import { ScrollView, Text, View , TouchableOpacity} from "react-native";
 
 import Icon from "react-native-vector-icons/Feather";
 import { gql, useQuery } from "@apollo/client";
-import { Button, Card } from "react-native-elements";
+import { FAB, Button, Card, Switch } from "react-native-elements";
 
 const styles = require("../styles/styles");
 
@@ -12,6 +12,8 @@ export const GET_ALL_TASKS = gql`
     getAllTasks {
       taskName
       id
+      startDate
+      interval
     }
   }
 `;
@@ -35,12 +37,13 @@ export function TasksScreen ({route, navigation}) {
   return (
     <ScrollView>
 
-      {data.getAllTasks.map(({taskName, id}) => (
+      {data.getAllTasks.map(({taskName, id, interval, startDate}) => (
         <Card key={id}> 
 
           <Card.Title>
           Goal: {taskName}
           </Card.Title>
+          <Text> every {interval} days</Text>
 
         <Button key={id}
         icon={<Icon name="edit-2"/>}
@@ -48,23 +51,28 @@ export function TasksScreen ({route, navigation}) {
           navigation.navigate("TaskDetails", {
             taskName: {taskName}, 
             id: {id}, 
+            interval: {interval}, 
+            startDate: {startDate}
           });
         }}
         />
-    
+        <Switch value={true}></Switch> 
+    {/* switch value = "time out" */}
     
         </Card>
       ))}
 
-      <Button title={"Add New Task"} 
+      <FAB
         icon ={<Icon name="plus"/>}
         onPress={() => {
           navigation.navigate("TaskDetails", {
-            taskName: "USER_ENTERING_NEW_TASK", 
-            id: "USER_ENTERING_NEW_TASK"
+            taskName: "", 
+            id: "",
+            interval: "", 
+            startDate: ""
           });
         }}
-      ></Button>
+      />
 
     </ScrollView>
   );

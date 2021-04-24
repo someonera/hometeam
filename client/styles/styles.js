@@ -16,8 +16,12 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   input: {
-    fontSize: 20, 
+    fontSize: 10, 
     
+  },
+  picker: {
+    fontSize:20,
+    width: "80%"
   }
 
 });
