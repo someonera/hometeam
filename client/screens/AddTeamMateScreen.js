@@ -1,8 +1,8 @@
-import React, { useReducer, useState} from 'react';
-import { Text, TextInput, View , TouchableOpacity} from 'react-native';
-const styles = require('../styles/styles');
-import {gql, useMutation } from '@apollo/client'
-import {Button } from 'react-native-elements'
+import React, { useReducer, useState} from "react";
+import { Text, TextInput, View , TouchableOpacity} from "react-native";
+const styles = require("../styles/styles");
+import {gql, useMutation } from "@apollo/client";
+import {Button } from "react-native-elements";
 
 /// either GET an existing user if you're coming from a user name 
 /// or Have the details blank if you're coming from "Add user"
@@ -14,19 +14,19 @@ const ADD_NEW_USER = gql `
       name
     }
   }
-`
+`;
 
 export function AddTeamMateScreen({route, navigation}) {
 
-  const [input, setInput] = useState("")
+  const [input, setInput] = useState("");
   const [addUser, {loading, error, data} ] = useMutation(ADD_NEW_USER);
 
 
   const submit = e => {
     e.preventDefault();
-    console.log(input)
-    addUser({variables: {name : input}})
-  }
+    console.log(input);
+    addUser({variables: {name : input}});
+  };
 
   return (
     <View>
@@ -46,6 +46,6 @@ export function AddTeamMateScreen({route, navigation}) {
       
           
     </View>
-  )
+  );
   
 }

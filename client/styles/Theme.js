@@ -1,9 +1,9 @@
 
-import {TouchableHighlight} from 'react-native'
+import {TouchableHighlight} from "react-native";
 
 export const theme = {
   colors: {
-    primary: 'pink'
+    primary: "pink"
   }, 
 
 
@@ -22,7 +22,7 @@ export const theme = {
 
   Header: {
     headerStyle: {
-      backgroundColor: 'pink'
+      backgroundColor: "pink"
     }
   }, 
 
@@ -42,8 +42,8 @@ export const theme = {
   }, 
 
   Input: {
-    
+
   }
 
 
-}
+};

@@ -6,26 +6,35 @@ import { gql, useQuery } from "@apollo/client";
 import EditableText from "react-native-inline-edit";
 
 
-const GET_TASK = gql`
-  query ($taskName: String!){
-    getTask (taskName: $taskName){
-      taskName
-      taskWho {
-        name
+const GET_USER = gql`
+  query ($name: String!){
+    getUser (name: $name){
+      name
+      tasks {
+        taskName
       }
       id
     }
   }
 `;
 
+const ADD_NEW_USER = gql `
+  mutation addUser ($name: String!) {
+    addUser(name: $name) {
+      name
+    }
+  }
+`;
 
-export function TaskDetailsScreen({route, navigation}) {
 
-  const taskTitle = route.params.taskName;
+export function UserDetailsScreen({route, navigation}) {
 
-  const [title, setTitle] = useState(taskTitle === "USER_ENTERING_NEW_TASK" ? " " : taskTitle.taskName);
 
-  const { loading, error, data } = useQuery(GET_TASK, { variables: { taskName: title }} );
+  const userTitle = route.params.name;
+
+  const [title, setTitle] = useState(userTitle === "USER_ENTERING_NEW_USER" ? " " : userTitle.name);
+
+  const { loading, error, data } = useQuery(GET_USER, { variables: { name: title }} );
 
   if (loading) return <Text> 'Loading...';</Text>;
   if (error) return <Text>`Error! ${error.message}`</Text>;
@@ -43,16 +52,15 @@ export function TaskDetailsScreen({route, navigation}) {
             <Card.Divider/>
 
 
-        <TextInput
-          value={"description here gotta do the set state"}
-        />
+        
         </SafeAreaView>
   
     
   <Card.Divider/>
     <View>
-      <Text>Who Does This Task?</Text>
-      <CheckBox></CheckBox>
+      <Text>User skills: list the tasks this user does  </Text>
+      <Text> and give them an icon based on their level  </Text>
+
     </View>
     
     <Button title={"Save Changes"}></Button>

@@ -1,11 +1,11 @@
 
 
-import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-const styles = require('../styles/styles')
-import { gql, useQuery } from '@apollo/client'
-import {Button , Card} from 'react-native-elements'
-import Icon from 'react-native-vector-icons/Feather'
+import React, { useEffect, useState, useLayoutEffect } from "react";
+import { ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
+const styles = require("../styles/styles");
+import { gql, useQuery } from "@apollo/client";
+import {Button , Card} from "react-native-elements";
+import Icon from "react-native-vector-icons/Feather";
 
 
 const GET_ALL_USERS = gql`
@@ -19,12 +19,12 @@ const GET_ALL_USERS = gql`
       
     }
   }
-`
+`;
 
 export function TeamMatesScreen({routes, navigation}) {
-  const { loading, error, data } = useQuery(GET_ALL_USERS)
-  if (loading) return <Text> 'Loading...';</Text>
-  if (error) return <Text>`Error! ${error.message}`</Text>
+  const { loading, error, data } = useQuery(GET_ALL_USERS);
+  if (loading) return <Text> 'Loading...';</Text>;
+  if (error) return <Text>`Error! ${error.message}`</Text>;
   return (
     <ScrollView>
       <Button
@@ -32,7 +32,7 @@ export function TeamMatesScreen({routes, navigation}) {
         icon={<Icon name="plus"/>}
         title = "  New TeamMate"
         onPress={() => {
-          navigation.navigate('AddTeamMate')
+          navigation.navigate("AddTeamMate");
         }}
       />
     
@@ -45,12 +45,17 @@ export function TeamMatesScreen({routes, navigation}) {
         <Button 
             buttonStyle={{marginLeft: 150}}
             icon={<Icon name="edit-2"/>}
+            onPress={() => {
+              navigation.navigate("UserDetails", {
+                name: {name}, 
+              });
+            }}
           />
         </Card.Title>
   
         <Card.Divider/>
         
-        <View style={{position:'relative', alignItems:"center"}}> 
+        <View style={{position:"relative", alignItems:"center"}}> 
           <Icon name="smile" size={30}/>
           <Text>All Time Goals: </Text>
           <Text>MVP Awards: </Text>
@@ -62,5 +67,5 @@ export function TeamMatesScreen({routes, navigation}) {
       </Card>
       ))}
     </ScrollView>
-  )
+  );
 }

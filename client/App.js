@@ -1,28 +1,29 @@
-import React from 'react';
-import  ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
+import React from "react";
+import  ApolloClient from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
 
-import { createStackNavigator } from '@react-navigation/stack'; 
-import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from "@react-navigation/stack"; 
+import { NavigationContainer } from "@react-navigation/native";
 
-import {ThemeProvider, Button} from 'react-native-elements'
-const { theme } = require('./styles/Theme')
+import {ThemeProvider, Button} from "react-native-elements";
+const { theme } = require("./styles/Theme");
 
-const { HomeScreen } = require('./screens/HomeScreen')
-const { TasksScreen } = require('./screens/TasksScreen')
-const { TeamMatesScreen } = require('./screens/TeamMatesScreen')
-const { AddTeamMateScreen } = require('./screens/AddTeamMateScreen')
-const { TaskDetailsScreen } = require('./screens/TaskDetailsScreen')
+const { HomeScreen } = require("./screens/HomeScreen");
+const { TasksScreen } = require("./screens/TasksScreen");
+const { TeamMatesScreen } = require("./screens/TeamMatesScreen");
+const { AddTeamMateScreen } = require("./screens/AddTeamMateScreen");
+const { TaskDetailsScreen } = require("./screens/TaskDetailsScreen");
+const { UserDetailsScreen } = require("./screens/UserDetailsScreen");
 
 
-const {screenOptions} = require('./styles/headerstyles')
+const {screenOptions} = require("./styles/headerstyles");
 
 const client = new ApolloClient({
-  uri: 'http://192.168.1.124:4000'
-})
+  uri: "http://192.168.1.124:4000"
+});
 
-const Stack = createStackNavigator()
-const Tab = createStackNavigator()
+const Stack = createStackNavigator();
+const Tab = createStackNavigator();
 
 
 function TeamStack() {
@@ -30,8 +31,9 @@ function TeamStack() {
     <Tab.Navigator>
       <Tab.Screen name ="TeamMates" component={TeamMatesScreen} />
       <Tab.Screen name="AddTeamMate" component={AddTeamMateScreen} />
+      <Tab.Screen name='UserDetails' component={UserDetailsScreen} />
     </Tab.Navigator>
-  )
+  );
 }
 
 function TasksStack() {
@@ -40,7 +42,7 @@ function TasksStack() {
       <Tab.Screen name ="Tasks" component={TasksScreen}/>
       <Tab.Screen name="TaskDetails" component={TaskDetailsScreen}/>
     </Tab.Navigator>
-  )
+  );
 }
 
 // function GamesStack() {
@@ -65,4 +67,4 @@ export default function App() {
     </ThemeProvider>
     </ApolloProvider>
   );
-};
+}

@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
-const styles = require('../styles/styles')
-import { Button, ListItem } from 'react-native-elements'
-import Icon from 'react-native-vector-icons/Feather'
+import React, { useEffect, useState, useLayoutEffect } from "react";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableHighlight } from "react-native";
+const styles = require("../styles/styles");
+import { Button, ListItem } from "react-native-elements";
+import Icon from "react-native-vector-icons/Feather";
 
 export function HomeScreen({navigation, route}) {
 
@@ -11,15 +11,15 @@ export function HomeScreen({navigation, route}) {
       headerRight: () => (
         <Button title="Log Out" />
       )
-    })
-  }, [navigation])
+    });
+  }, [navigation]);
 
   return (
     <View>
       <ListItem
           Component={TouchableHighlight}
           onPress={() => {
-          navigation.navigate('TeamMates')
+          navigation.navigate("TeamMates");
         }}
       >
         <Icon name="user" size={30} color="green"/>
@@ -38,7 +38,7 @@ export function HomeScreen({navigation, route}) {
       <ListItem
         Component={TouchableOpacity}
         onPress={() => {
-          navigation.navigate('TasksTabs')
+          navigation.navigate("TasksTabs");
         }} color="1ACDA5#" > 
         <Icon name="dribbble" size={30} color="green"/>
         <ListItem.Content>
@@ -84,5 +84,5 @@ export function HomeScreen({navigation, route}) {
       </ListItem>
 
     </View>
-  )
+  );
 }
