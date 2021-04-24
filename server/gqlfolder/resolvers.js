@@ -26,7 +26,7 @@ const resolvers = {
 
   getTask: async (obj, args) => {
     try {
-      const gotTask = await Task.find({task_name: args.taskName});
+      const gotTask = await Task.find({taskName: args.taskName});
       return(gotTask);
     } catch (err) {
       console.log(err);
@@ -62,7 +62,7 @@ const resolvers = {
 
   addTask: async (obj, args) => {
     try {
-      const addedTask = await Task.create({task_name: args.taskName});
+      const addedTask = await Task.create({taskName: args.taskName});
       console.log(args);
       return addedTask;
 
@@ -73,7 +73,7 @@ const resolvers = {
 
   addUsersToTask: async (obj, args) => {
       try {
-        const tempTask = (await Task.find({task_name: args.taskName}))[0];
+        const tempTask = (await Task.find({taskName: args.taskName}))[0];
         const tempUser = (await User.find({name: args.name}))[0];
 
         const tempArray = tempTask.taskWho;
@@ -84,7 +84,7 @@ const resolvers = {
           tempArray.push(tempUser);
         }
 
-      const upDatedTask = (await Task.findByIdAndUpdate(tempTask._id, {task_who: tempArray}))[0];
+      const upDatedTask = (await Task.findByIdAndUpdate(tempTask._id, {taskWho: tempArray}))[0];
       console.log(upDatedTask);
       return upDatedTask;
 

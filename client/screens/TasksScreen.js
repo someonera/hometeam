@@ -19,6 +19,7 @@ const GET_ALL_TASKS = gql`
 
 export function TasksScreen({route, navigation}) {
   const { loading, error, data } = useQuery(GET_ALL_TASKS);
+  console.log(data)
   if (loading) return <Text> 'Loading...';</Text>;
   if (error) return <Text>`Error! ${error.message}`</Text>;
 

@@ -4,7 +4,7 @@ const typeDefs = gql`
 
 type User {
   name: String
-  tasks: [Task!]
+  tasks: [Task]
   numOfTasks: Int
   completedThisGame: Int
   completedEver: Int 

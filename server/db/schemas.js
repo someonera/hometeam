@@ -1,19 +1,19 @@
-const mongoose = require("mongoose");
+const mongoose = require ("mongoose");
 const db = require("./db");
 
 const userSchema = new mongoose.Schema({
-  name: {type: String, required: true },
-  tasks: {type: Array, required: true }, 
+  name: String,
+  tasks: Array, 
   num_of_tasks: Number, 
   completed_this_game: Number, 
   completed_ever: Number 
 });
 
 const taskSchema = new mongoose.Schema({
-  task_name:{type: String, required: true },
-  task_who: {type: Array, required: true },
-  task_desc: String, 
-  do_days: Number, 
+  taskName: String,
+  taskWho: Array,
+  taskDesc: String, 
+  doDays: Number, 
 });
 
 const gameSchema = new mongoose.Schema({
