@@ -18,17 +18,10 @@ const GET_USER = gql`
   }
 `;
 
-const ADD_NEW_USER = gql `
-  mutation addUser ($name: String!) {
-    addUser(name: $name) {
-      name
-    }
-  }
-`;
+
 
 
 export function UserDetailsScreen({route, navigation}) {
-
 
   const userTitle = route.params.name;
 
@@ -65,6 +58,7 @@ export function UserDetailsScreen({route, navigation}) {
     
     <Button title={"Save Changes"}></Button>
     <Button title={"Discard Changes"}></Button>
+    <Button title={"Delete This User"}/>
 
     </Card>
   );

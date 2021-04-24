@@ -1,6 +1,7 @@
 import React from "react";
 import  ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
+import 'react-native-gesture-handler';
 
 import { createStackNavigator } from "@react-navigation/stack"; 
 import { NavigationContainer } from "@react-navigation/native";

@@ -17,6 +17,7 @@ type Task {
   taskDesc: String
   doDays: Int
   id: ID
+  start_date: String
 }
 
 type Game {
@@ -45,6 +46,8 @@ type Mutation {
   #delete task
 
   addUsersToTask(taskName: String!, name: String!):Task!
+
+  editTask(id: ID!, taskName: String): Task!
 
   }
 `;

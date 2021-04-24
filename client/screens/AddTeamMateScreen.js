@@ -1,8 +1,8 @@
 import React, { useReducer, useState} from "react";
-import { Text, TextInput, View , TouchableOpacity} from "react-native";
+import { Text, TextInput, View , TouchableOpacity, SafeAreaView} from "react-native";
 const styles = require("../styles/styles");
 import {gql, useMutation } from "@apollo/client";
-import {Button } from "react-native-elements";
+import { Button, Card } from "react-native-elements";
 
 /// either GET an existing user if you're coming from a user name 
 /// or Have the details blank if you're coming from "Add user"
@@ -29,23 +29,35 @@ export function AddTeamMateScreen({route, navigation}) {
   };
 
   return (
-    <View>
-      <Text>New Team Mate: </Text>
 
-      <TextInput
+     
+<Card containerStyle={{height:"95%"}}>
+<Text>Add New Team Mate: </Text>
+
+        <SafeAreaView>
+        <TextInput
         editable = {true}
         style={{height: 40}}
-        editable = { true }
         value = {input}
         onChangeText = {setInput} 
       />
 
-      <Button title="ADD"  onPress={submit}>
-        <Text> ADD </Text>
-      </Button>
+            <Card.Divider/>
+        
+        </SafeAreaView>
+  
+    
+  <Card.Divider/>
+    <Text>You could add tasks to the user here </Text>    
+    <Button title={"Add"} onPress={submit}></Button>
+    <Button title={"Discard Changes"}></Button>
+
+    </Card>
+
       
           
-    </View>
   );
   
 }
+
+

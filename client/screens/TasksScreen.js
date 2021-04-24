@@ -1,5 +1,5 @@
-import React, { useReducer } from "react";
-import { Text, View , TouchableOpacity} from "react-native";
+import React, { useReducer , useEffect, useState} from "react";
+import { ScrollView, Text, View , TouchableOpacity} from "react-native";
 
 import Icon from "react-native-vector-icons/Feather";
 import { gql, useQuery } from "@apollo/client";
@@ -7,7 +7,7 @@ import { Button, Card } from "react-native-elements";
 
 const styles = require("../styles/styles");
 
-const GET_ALL_TASKS = gql`
+export const GET_ALL_TASKS = gql`
   query getAllTasks {
     getAllTasks {
       taskName
@@ -16,15 +16,24 @@ const GET_ALL_TASKS = gql`
   }
 `;
 
+export function TasksScreen ({route, navigation}) {
+  const { loading, error, data , refetch } = useQuery(GET_ALL_TASKS);
 
-export function TasksScreen({route, navigation}) {
-  const { loading, error, data } = useQuery(GET_ALL_TASKS);
-  console.log(data)
-  if (loading) return <Text> 'Loading...';</Text>;
-  if (error) return <Text>`Error! ${error.message}`</Text>;
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      refetch(); 
+    });
+    return () => {
+      unsubscribe;
+    };
+  }, [navigation]);
 
+
+    if (loading) return <Text> 'Loading...';</Text>;
+    if (error) return <Text>`Error! ${error.message}`</Text>;
+    
   return (
-    <View>
+    <ScrollView>
 
       {data.getAllTasks.map(({taskName, id}) => (
         <Card key={id}> 
@@ -38,6 +47,7 @@ export function TasksScreen({route, navigation}) {
         onPress={() => {
           navigation.navigate("TaskDetails", {
             taskName: {taskName}, 
+            id: {id}, 
           });
         }}
         />
@@ -50,12 +60,13 @@ export function TasksScreen({route, navigation}) {
         icon ={<Icon name="plus"/>}
         onPress={() => {
           navigation.navigate("TaskDetails", {
-            taskName: "USER_ENTERING_NEW_TASK"
+            taskName: "USER_ENTERING_NEW_TASK", 
+            id: "USER_ENTERING_NEW_TASK"
           });
         }}
       ></Button>
 
-    </View>
+    </ScrollView>
   );
   
 }
