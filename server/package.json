@@ -12,5 +12,9 @@
   "dependencies": {
     "apollo-server": "^2.23.0",
     "graphql": "^15.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.25.0",
+    "eslint-plugin-react": "^7.23.2"
   }
 }
