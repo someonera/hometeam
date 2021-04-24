@@ -23,22 +23,22 @@ export function TaskDetailsScreen({route, navigation}) {
 
   const taskTitle = route.params.taskName;
 
-  // const [title, setTitle] = useState(taskTitle === "USER_ENTERING_NEW_TASK" ? " " : taskTitle.taskName);
+  const [title, setTitle] = useState(taskTitle === "USER_ENTERING_NEW_TASK" ? " " : taskTitle.taskName);
 
-  // const { loading, error, data } = useQuery(GET_TASK, { variables: { taskName: title }} );
+  const { loading, error, data } = useQuery(GET_TASK, { variables: { taskName: title }} );
 
-  // if (loading) return <Text> 'Loading...' </Text>;
-  // if (error) return <Text>`Error! ${error.message}`</Text>;
+  if (loading) return <Text> 'Loading...' </Text>;
+  if (error) return <Text>`Error! ${error.message}`</Text>;
 
   return (
     <Card containerStyle={{height:"95%"}}>
 
         <SafeAreaView>
-          {/* <TextInput 
+          <TextInput 
             styles={styles.input}
             value={title}
             onChangeText={setTitle}
-          /> */}
+          />
 
             <Card.Divider/>
 
