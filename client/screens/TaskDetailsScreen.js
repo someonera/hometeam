@@ -37,7 +37,7 @@ const EDIT_TASK = gql `
 `;
 
 export function TaskDetailsScreen({route, navigation}) {
-
+  
   const taskTitle = route.params.taskName;
   const task_id = (route.params.id === "USER_ENTERING_NEW_TASK") ? "" : route.params.id.id; 
 

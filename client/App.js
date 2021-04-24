@@ -29,30 +29,23 @@ const Tab = createStackNavigator();
 
 function TeamStack() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name ="TeamMates" component={TeamMatesScreen} />
-      <Tab.Screen name="AddTeamMate" component={AddTeamMateScreen} />
-      <Tab.Screen name='UserDetails' component={UserDetailsScreen} />
-    </Tab.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen name ="TeamMates" component={TeamMatesScreen} />
+      <Stack.Screen name="AddTeamMate" component={AddTeamMateScreen} />
+      <Stack.Screen name='UserDetails' component={UserDetailsScreen} />
+    </Stack.Navigator>
   );
 }
 
 function TasksStack() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name ="Tasks" component={TasksScreen}/>
-      <Tab.Screen name="TaskDetails" component={TaskDetailsScreen}/>
-    </Tab.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen name ="Tasks" component={TasksScreen}/>
+      <Stack.Screen name="TaskDetails" component={TaskDetailsScreen}/>
+    </Stack.Navigator>
   );
 }
 
-// function GamesStack() {
-//   return (
-//     <Tab.Navigator>
-      
-//     </Tab.Navigator>
-//   )
-// }
 
 export default function App() {
   return (
