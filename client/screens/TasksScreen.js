@@ -14,13 +14,16 @@ export const GET_ALL_TASKS = gql`
       id
       startDate
       interval
+      taskWho {
+        name
+      }
     }
   }
 `;
 
 export function TasksScreen ({route, navigation}) {
   const { loading, error, data , refetch } = useQuery(GET_ALL_TASKS);
-
+  console.log(data)
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       refetch(); 
@@ -37,7 +40,7 @@ export function TasksScreen ({route, navigation}) {
   return (
     <ScrollView>
 
-      {data.getAllTasks.map(({taskName, id, interval, startDate}) => (
+      {data.getAllTasks.map(({taskName, id, interval, startDate, taskWho}) => (
         <Card key={id}> 
 
           <Card.Title>
@@ -52,7 +55,8 @@ export function TasksScreen ({route, navigation}) {
             taskName: {taskName}, 
             id: {id}, 
             interval: {interval}, 
-            startDate: {startDate}
+            startDate: {startDate}, 
+            taskWho: {taskWho}
           });
         }}
         />
@@ -69,7 +73,8 @@ export function TasksScreen ({route, navigation}) {
             taskName: "", 
             id: "",
             interval: "", 
-            startDate: ""
+            startDate: "", 
+            taskWho: ""
           });
         }}
       />

@@ -29,23 +29,34 @@ const EDIT_TASK = gql `
 
 const GET_ALL_USERS = gql`
   query getAllUsers {
-    name
-    id
+    getAllUsers {
+      tasks {
+        taskName
+      }
+      name
+      id
+    }
   }
-
 `
 
 export function TaskDetailsScreen({route, navigation}) {
 
-  const {taskName, id, startDate, interval} = route.params
+  const { loading, error, data } = useQuery(GET_ALL_USERS);
+  // console.log("here:", data.getAllUsers[0].name)
+  const [addTask, {load, err, taskData}] = useMutation(ADD_NEW_TASK);
+  const [editTask, {loadtask, errtask, editData}] = useMutation(EDIT_TASK); 
+
+  console.log("route params", route.params)
+  const {taskName, id, startDate, interval, taskWho} = route.params
+  console.log("this is taskwho array:", taskWho.taskWho)
 
   const [title, setTitle] = React.useState(taskName === "" ? "New Task Name" : taskName.taskName);
   const [taskId, setTaskId] = React.useState((id === "") ? "" : id.id);
   const [taskStartDate, setTaskStartDate] = React.useState((startDate === "") ? moment() : startDate.startDate);
   const [taskInterval, setTaskInterval] = React.useState((interval === "") ? "7" : interval.interval);
+  const [taskAlloc, setTaskAlloc] = React.useState((taskWho === "") ? "" : taskWho.taskWho); 
+  console.log("taskAlloc:", taskAlloc)
 
-  const [addTask, {load, err, taskData}] = useMutation(ADD_NEW_TASK);
-  const [editTask, {loadtask, errtask, editData}] = useMutation(EDIT_TASK); 
 
   const disableDates = (date) => {
     const today = moment(); 
@@ -59,13 +70,14 @@ export function TaskDetailsScreen({route, navigation}) {
   const submit = e => {
     e.preventDefault(); 
     if (taskId) {
-      editTask({variables: {id: taskId, taskName: title, startDate: taskStartDate, interval: parseInt(taskInterval)}});
+      editTask({variables: {id: taskId, taskName: title, startDate: taskStartDate, taskWho: taskAlloc, interval: parseInt(taskInterval)}});
     } else {
-      addTask({variables: {taskName: title, startDate: taskStartDate, interval: parseInt(taskInterval)}}); 
+      addTask({variables: {taskName: title, startDate: taskStartDate, taskWho: taskAlloc, interval: parseInt(taskInterval)}}); 
     }
   };
 
   return (
+    <ScrollView>
     <Card containerStyle={{height:"95%"}}>
         
 
@@ -89,14 +101,27 @@ export function TaskDetailsScreen({route, navigation}) {
           style={styles.picker}
           itemStyle={{height: 110}}
           selectedValue={taskInterval}
-          onValueChange={(itemValue, itemIndex) => 
+          onValueChange={(itemValue) => 
             setTaskInterval(itemValue)
           }>
             <Picker.Item label="every day" value="1" />
             <Picker.Item label="every week" value="7" />
             <Picker.Item label="every two weeks" value="14" />
             <Picker.Item label="every month" value="28" />
+
       </Picker>
+
+    <Picker
+      style={styles.picker}
+      itemStyle={{height: 110}}
+      selectedValue={taskAlloc}
+      onValueChange={(itemValue)=> setTaskAlloc(itemValue)}
+    >
+        {data.getAllUsers.map(({name, id}) => (
+          <Picker.Item key={id} label={name} value={name}/>
+        ))}
+
+    </Picker> 
   
     <Card.Divider/>
 
@@ -116,5 +141,6 @@ export function TaskDetailsScreen({route, navigation}) {
     </View>
 
     </Card>
+    </ScrollView>
   );
 }

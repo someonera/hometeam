@@ -13,7 +13,7 @@ type User {
 
 type Task {
   taskName: String
-  taskWho: [User]
+  taskWho: User
   taskDesc: String
   interval: Int
   id: ID
@@ -43,12 +43,13 @@ type Mutation {
   #delete user
 
   #edit user()
-  addTask(taskName: String!, startDate: String!, interval: Int!):Task!
+  addTask(taskName: String!, startDate: String!, interval: Int!): Task!
   #delete task
 
-  addUsersToTask(taskName: String!, name: String!):Task!
+  addUsersToEditTask(id: ID!, name: String):Task!
+  addUsersToNewTask( taskName:String!, name:String!):Task!
 
-  editTask(id: ID!, taskName: String, taskWho: String, startDate: String, interval: Int): Task!
+  editTask(id: ID!, taskName: String, startDate: String, interval: Int): Task!
 
   }
 `;
