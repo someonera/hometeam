@@ -89,6 +89,25 @@ export function HomeScreen({navigation, route}) {
 
       </ListItem>
 
+      <ListItem
+        Component={TouchableOpacity}
+        onPress={() => {
+          navigation.navigate("GotTheBall")
+        }}
+      >
+        
+      <Icon name="alert-triangle" size={30} color="green"/>
+        <ListItem.Content>
+          <ListItem.Title>
+            I've Got The Ball
+          </ListItem.Title>
+          <ListItem.Subtitle>
+             My Tasks This Week
+          </ListItem.Subtitle>
+        </ListItem.Content>
+
+      </ListItem>
+
     </View>
   );
 }

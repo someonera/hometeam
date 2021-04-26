@@ -24,6 +24,7 @@ const GET_GAME = gql`
       gameTasks {
         taskName
         taskWho
+        
       }
       id
       startDate
@@ -95,13 +96,14 @@ export function GameScreen({route, navigation}) {
 
       <Card.Divider/>
       
+      {/* HOW DO I DO THIS?? */}
       {/* this doesn't work when the game renders for the first time */}
       {/* {game.gameTasks.map(({taskName, taskWho}) => (
         <Text key={taskName}>{taskName} - {taskWho} </Text>
         ) 
       )} */}
 
-      <GameTaskComponent gameTasks={game.gameTasks}></GameTaskComponent>
+      {/* <GameTaskComponent game={game}></GameTaskComponent> */}
 
     <Card.Divider/>
 

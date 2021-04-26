@@ -17,6 +17,7 @@ const { TaskDetailsScreen } = require("./screens/TaskDetailsScreen");
 const { UserDetailsScreen } = require("./screens/UserDetailsScreen");
 const { GameScreen } = require("./screens/GameScreen");
 const { StatsScreen } = require("./screens/StatsScreen");
+const { GotTheBallScreen } = require("./screens/GotTheBallScreen")
 
 
 const {screenOptions} = require("./styles/headerstyles");
@@ -74,6 +75,7 @@ export default function App() {
         <Stack.Screen name="TeamMates" component={TeamStack} />
         <Stack.Screen name="Game" component={GameStack}/> 
         <Stack.Screen name="Stats" component={StatsStack}/>
+        <Stack.Screen name="GotTheBall" component={GotTheBallScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
     </ThemeProvider>
