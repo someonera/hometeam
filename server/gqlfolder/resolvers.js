@@ -1,4 +1,4 @@
-const { User, Task }  = require("../db/schemas");
+const { User, Task , Game}  = require("../db/schemas");
 // const Task  = require('../db/schemas')
 
 const resolvers = {
@@ -39,8 +39,18 @@ const resolvers = {
     } catch (err) {
       console.log(err);
     }
-  }
+  },
 
+  getGame: async (obj, args) => {
+    try {
+      console.log(args.endDate)
+      const thisGame = await Game.findOne({endDate: args.endDate})
+      console.log(thisGame)
+      return thisGame
+    } catch (err) {
+      console.log(err)
+    }
+  }
 },
 
   Mutation: {
@@ -133,6 +143,13 @@ const resolvers = {
         }
       }, 
 
+
+  newGame: async (obj, args) => {
+    console.log(args)
+    const newGame= await Game.create({startDate: args.startDate, endDate: args.endDate, score: 0})
+    return newGame
+
+  }, 
 
 
   }

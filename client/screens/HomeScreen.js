@@ -54,6 +54,9 @@ export function HomeScreen({navigation, route}) {
 
       <ListItem
         Component={TouchableOpacity}
+        onPress={() => {
+          navigation.navigate("Game")
+        }}
       >
       <Icon name="eye" size={30} color="green"/>
         <ListItem.Content>
@@ -70,6 +73,9 @@ export function HomeScreen({navigation, route}) {
 
       <ListItem
         Component={TouchableOpacity}
+        onPress={() => {
+          navigation.navigate("Stats")
+        }}
       >
       <Icon name="eye" size={30} color="green"/>
         <ListItem.Content>

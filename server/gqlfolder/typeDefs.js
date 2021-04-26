@@ -21,13 +21,14 @@ type Task {
 }
 
 type Game {
-  currentScore: Int
-  homeGoals: Int
-  awayGoals: Int
-  gameTasks: [Task]
-  goalsBy: [User]
-  players: [User]
-
+  startDate: String
+  endDate: String
+  score: Int
+  gameTasks:[Task]
+  players:[User]
+  doneTasks:[Task]
+  notDoneTasks:[Task]
+  id: ID
 }
 
 type Query {
@@ -35,6 +36,7 @@ type Query {
   getAllUsers: [User!]
   getTask(taskName:String!):[Task!]
   getAllTasks: [Task!]
+  getGame(endDate: String!): Game
 }
 
 type Mutation {
@@ -48,10 +50,11 @@ type Mutation {
 
   addUsersToEditTask(id: ID!, name: String):Task!
 
-
-  addUsersToNewTask( taskName:String!, name:String!):Task!
-
   editTask(id: ID!, taskName: String, startDate: String, interval: Int): Task!
+
+  newGame(startDate: String!, endDate: String!): Game! 
+
+
 
   }
 `;

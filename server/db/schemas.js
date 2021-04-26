@@ -18,18 +18,19 @@ const taskSchema = new mongoose.Schema({
 });
 
 const gameSchema = new mongoose.Schema({
-  current_score: {type: Number, required: true },
-  home_goals: {type: Number, required: true }, 
-  away_goals: {type: Number, required: true },
-  game_tasks: {type: Array, required: true},
-  goals_by: Array, 
-  players: {type: Array, required: true}
+  startDate: String, 
+  endDate: String,
+  score: Number, 
+  gameTasks: Array,
+  players: Array, 
+  doneTasks: Array,
+  notDoneTasks: Array,
 
 });
 
 
 const User = db.model("users", userSchema);
 const Task = db.model("tasks", taskSchema); 
-const Game = db.model("games", gameSchema);
+const Game = db.model("helpme", gameSchema);
 
 module.exports = { User, Task , Game};

@@ -15,6 +15,8 @@ const { TeamMatesScreen } = require("./screens/TeamMatesScreen");
 const { AddTeamMateScreen } = require("./screens/AddTeamMateScreen");
 const { TaskDetailsScreen } = require("./screens/TaskDetailsScreen");
 const { UserDetailsScreen } = require("./screens/UserDetailsScreen");
+const { GameScreen } = require("./screens/GameScreen");
+const { StatsScreen } = require("./screens/StatsScreen");
 
 
 const {screenOptions} = require("./styles/headerstyles");
@@ -24,7 +26,6 @@ const client = new ApolloClient({
 });
 
 const Stack = createStackNavigator();
-const Tab = createStackNavigator();
 
 
 function TeamStack() {
@@ -46,6 +47,21 @@ function TasksStack() {
   );
 }
 
+function GameStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="ThisGame" component={GameScreen}/> 
+    </Stack.Navigator>
+  )
+}
+
+function StatsStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="PastStats" component={StatsScreen}/> 
+    </Stack.Navigator>
+  )
+}
 
 export default function App() {
   return (
@@ -56,6 +72,8 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="TasksTabs" component={TasksStack} />
         <Stack.Screen name="TeamMates" component={TeamStack} />
+        <Stack.Screen name="Game" component={GameStack}/> 
+        <Stack.Screen name="Stats" component={StatsStack}/>
       </Stack.Navigator>
     </NavigationContainer>
     </ThemeProvider>

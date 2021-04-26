@@ -48,9 +48,9 @@ const ADD_USER_TO_TASK = gql`
 
 export function TaskDetailsScreen({route, navigation}) {
 
-  const [addTask, {load, err, taskData}] = useMutation(ADD_NEW_TASK);
-  const [editTask, {loadtask, errtask, editData}] = useMutation(EDIT_TASK); 
-  const [addUsersToEditTask, {loadd, errd, editUserData}] = useMutation(ADD_USER_TO_TASK); 
+  const [addTask, {loading: addLoad, error: addErr, data: addData}] = useMutation(ADD_NEW_TASK);
+  const [editTask, {loading: editLoading, error: editError, data: editData}] = useMutation(EDIT_TASK); 
+  const [addUsersToEditTask, {loading: usersLoading, error: usersError, data: usersData}] = useMutation(ADD_USER_TO_TASK); 
 
 
   const {taskName, id, startDate, interval, taskWho} = route.params
@@ -61,7 +61,7 @@ export function TaskDetailsScreen({route, navigation}) {
   const [taskStartDate, setTaskStartDate] = React.useState((startDate === "") ? moment() : startDate.startDate);
   const [taskInterval, setTaskInterval] = React.useState((interval === "") ? "7" : interval.interval);
   const [taskAlloc, setTaskAlloc] = React.useState((taskWho === "") ? "" : taskWho.taskWho); 
-  console.log("taskAlloc:", taskAlloc)
+  console.log("taskInterval:", taskInterval)
   
   const { loading, error, data } = useQuery(GET_ALL_USERS);
   if (loading ) return <Text>loading </Text>;
@@ -110,10 +110,11 @@ export function TaskDetailsScreen({route, navigation}) {
     <Picker
           style={styles.picker}
           itemStyle={{height: 110}}
-          selectedValue={taskInterval}
+          selectedValue={taskInterval.toString()}
           onValueChange={(itemValue) => 
             setTaskInterval(itemValue)
           }>
+            {/* <Picker.Item label="once" value="0"/> */}
             <Picker.Item label="every day" value="1" />
             <Picker.Item label="every week" value="7" />
             <Picker.Item label="every two weeks" value="14" />
