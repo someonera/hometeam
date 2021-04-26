@@ -31,6 +31,6 @@ const gameSchema = new mongoose.Schema({
 
 const User = db.model("users", userSchema);
 const Task = db.model("tasks", taskSchema); 
-const Game = db.model("helpme", gameSchema);
+const Game = db.model("games", gameSchema);
 
 module.exports = { User, Task , Game};

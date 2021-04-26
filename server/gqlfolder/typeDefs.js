@@ -31,11 +31,16 @@ type Game {
   id: ID
 }
 
+input TaskInput {
+  taskName: String
+  taskWho: String
+}
+
 type Query {
   getUser(name:String!): [User!]
   getAllUsers: [User!]
   getTask(taskName:String!):[Task!]
-  getAllTasks: [Task!]
+  getAllTasks(mon: String, sun: String): [Task!]
   getGame(endDate: String!): Game
 }
 
@@ -52,7 +57,7 @@ type Mutation {
 
   editTask(id: ID!, taskName: String, startDate: String, interval: Int): Task!
 
-  newGame(startDate: String!, endDate: String!): Game! 
+  newGame(startDate: String!, endDate: String!, gameTasks: [TaskInput]): Game! 
 
 
 

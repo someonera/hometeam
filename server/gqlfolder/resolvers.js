@@ -1,5 +1,6 @@
 const { User, Task , Game}  = require("../db/schemas");
 // const Task  = require('../db/schemas')
+const moment = require('moment')
 
 const resolvers = {
 
@@ -32,10 +33,16 @@ const resolvers = {
     }
   }, 
 
-  getAllTasks: async (obj) => {
+  getAllTasks: async (obj, args) => {
     try {
-      const allTasks = await Task.find({});
+      if (args.mon && args.sun) {
+        const unfiltered = await Task.find({})
+        const filtered = unfiltered.filter(task => (task.startDate > args.mon & task.startDate < args.sun))   
+        return filtered   
+      } else { 
+      allTasks = await Task.find({});
       return allTasks;
+      }
     } catch (err) {
       console.log(err);
     }
@@ -43,9 +50,9 @@ const resolvers = {
 
   getGame: async (obj, args) => {
     try {
-      console.log(args.endDate)
+      // console.log(args.endDate)
       const thisGame = await Game.findOne({endDate: args.endDate})
-      console.log(thisGame)
+      // console.log(thisGame)
       return thisGame
     } catch (err) {
       console.log(err)
@@ -71,8 +78,13 @@ const resolvers = {
 
   addTask: async (obj, args) => {
     try {
+      const nextSunday = (moment(args.startDate).endOf('isoWeek'))
+
       const taskCheck = await Task.findOne({taskName: args.taskName}); 
       const userCheck = await User.findOne({name: args.taskWho})
+      const gameCheck = await Game.findOne({endDate: {$gte: args.startDate}})
+
+      console.log(gameCheck)
       if (!taskCheck) {
       const addedTask = await Task.create({
         taskName: args.taskName, 
@@ -81,6 +93,11 @@ const resolvers = {
         taskWho: args.taskWho, 
       });
 
+      if (gameCheck) {
+        await Game.findByIdAndUpdate(gameCheck.id, {
+          gameTasks: [...gameCheck.gameTasks, {taskName: args.taskName, taskWho: args.taskWho}]
+        })
+      }
       await User.findByIdAndUpdate(userCheck.id, {tasks: [...userCheck.tasks, addedTask]}, {new: true})
 
       return addedTask;
@@ -118,7 +135,6 @@ const resolvers = {
         const tempUser = await User.findOne({name: args.name}); // this is the new user you're allocating the task to
         if (taskCheck.taskWho === args.name) return taskCheck
 
-
         // update the user name in the task 
         const addedNameToTask = await Task.findByIdAndUpdate(args.id, {taskWho: args.name}, {new: true}); 
 
@@ -145,15 +161,20 @@ const resolvers = {
 
 
   newGame: async (obj, args) => {
-    console.log(args)
-    const newGame= await Game.create({startDate: args.startDate, endDate: args.endDate, score: 0})
-    return newGame
-
-  }, 
-
-
+  try {
+    const gameCheck = await Game.findOne({startDate: args.startDate})
+    if (!gameCheck) {
+      const newGame= await Game.create({startDate: args.startDate, endDate: args.endDate, score: 0, gameTasks: args.gameTasks})
+      return newGame
+      } else {
+        return gameCheck
+      }
+    } catch (err) {
+        console.log(err)
+      }
+    }, 
   }
-};
+}; 
 
 
 module.exports = resolvers;

@@ -60,8 +60,7 @@ export function TaskDetailsScreen({route, navigation}) {
   const [taskId, setTaskId] = React.useState((id === "") ? "" : id.id);
   const [taskStartDate, setTaskStartDate] = React.useState((startDate === "") ? moment() : startDate.startDate);
   const [taskInterval, setTaskInterval] = React.useState((interval === "") ? "7" : interval.interval);
-  const [taskAlloc, setTaskAlloc] = React.useState((taskWho === "") ? "" : taskWho.taskWho); 
-  console.log("taskInterval:", taskInterval)
+  const [taskAlloc, setTaskAlloc] = React.useState((taskWho === "") ? "Sophie" : taskWho.taskWho); 
   
   const { loading, error, data } = useQuery(GET_ALL_USERS);
   if (loading ) return <Text>loading </Text>;
@@ -139,7 +138,7 @@ export function TaskDetailsScreen({route, navigation}) {
     <Text> Select Start Date: </Text>
     <CalendarPicker
       selectedStartDate={taskStartDate}
-      disabledDates={disableDates}
+      // disabledDates={disableDates}
       onDateChange={onDateChange}
     ></CalendarPicker>
 

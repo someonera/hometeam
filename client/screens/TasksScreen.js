@@ -59,8 +59,6 @@ export function TasksScreen ({route, navigation}) {
           });
         }}
         />
-        <Switch value={true}></Switch> 
-    {/* switch value = "time out" */}
     
         </Card>
       ))}
