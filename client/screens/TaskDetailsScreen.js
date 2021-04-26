@@ -9,8 +9,8 @@ import {Picker} from '@react-native-picker/picker';
 import moment from 'moment'
 
 const ADD_NEW_TASK = gql`
-  mutation addTask ($taskName: String!, $startDate: String!, $interval: Int!){
-    addTask(taskName: $taskName, startDate: $startDate, interval: $interval) {
+  mutation addTask ($taskName: String!, $startDate: String!, $interval: Int!, $taskWho: String!){
+    addTask(taskName: $taskName, startDate: $startDate, interval: $interval, taskWho: $taskWho) {
       taskName
     }
   }

@@ -43,12 +43,12 @@ type Mutation {
   #delete user
 
   #edit user()
-  addTask(taskName: String!, startDate: String!, interval: Int!): Task!
+  addTask(taskName: String!, startDate: String!, interval: Int!, taskWho: String!): Task!
   #delete task
 
   addUsersToEditTask(id: ID!, name: String):Task!
 
-  
+
   addUsersToNewTask( taskName:String!, name:String!):Task!
 
   editTask(id: ID!, taskName: String, startDate: String, interval: Int): Task!

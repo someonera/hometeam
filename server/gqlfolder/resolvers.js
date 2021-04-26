@@ -68,8 +68,11 @@ const resolvers = {
         taskName: args.taskName, 
         startDate: args.startDate,
         interval: args.interval, 
-        taskWho: [userCheck]
+        taskWho: args.taskWho, 
       });
+
+      await User.findByIdAndUpdate(userCheck.id, {tasks: [...userCheck.tasks, addedTask]}, {new: true})
+
       return addedTask;
       }
     } catch (err) {
@@ -77,9 +80,9 @@ const resolvers = {
       }
     }, 
 
+
   editTask: async (obj, args) => {
     try {
-
       const taskCheck = await Task.findOne({_id: args.id}); 
 
       if (taskCheck) {
@@ -104,9 +107,7 @@ const resolvers = {
 
         const tempUser = await User.findOne({name: args.name}); // this is the new user you're allocating the task to
         if (taskCheck.taskWho === args.name) return taskCheck
-        
-        console.log("taskWHo name:", taskCheck.taskWho); 
-        console.log("tempuser:", tempUser); 
+
 
         // update the user name in the task 
         const addedNameToTask = await Task.findByIdAndUpdate(args.id, {taskWho: args.name}, {new: true}); 
@@ -117,8 +118,6 @@ const resolvers = {
         }
 
         if (taskCheck.taskWho !== undefined) {
-          console.log(taskCheck.taskWho)
-          console.log("hello"); 
           if (taskCheck.taskWho !== tempUser.name) {
             const oldUser = await User.findOne({name: taskCheck.taskWho}); 
             const oldUserNewTasksArray = (oldUser.tasks).filter(task => task.taskName !== taskCheck.taskName) 
@@ -128,7 +127,7 @@ const resolvers = {
           }
         }
         return addedNameToTask;
-       // end of try statement
+
       } catch(err) {
         console.log(err);
         }

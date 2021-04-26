@@ -22,7 +22,17 @@ const GET_ALL_USERS = gql`
 `;
 
 export function TeamMatesScreen({routes, navigation}) {
-  const { loading, error, data } = useQuery(GET_ALL_USERS);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      refetch(); 
+    });
+    return () => {
+      unsubscribe;
+    };
+  }, [navigation]);
+
+  const { loading, error, data, refetch} = useQuery(GET_ALL_USERS);
   if (loading) return <Text> 'Loading...';</Text>;
   if (error) return <Text>`Error! ${error.message}`</Text>;
 
@@ -56,7 +66,7 @@ export function TeamMatesScreen({routes, navigation}) {
   
         <Card.Divider/>
           
-          <Text> Responsible For: </Text>
+          <Text> Skills </Text>
           {tasks.map(({taskName}) => (
             <Text key = {taskName}> {taskName} </Text>
           ))}
