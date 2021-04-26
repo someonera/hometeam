@@ -14,16 +14,13 @@ export const GET_ALL_TASKS = gql`
       id
       startDate
       interval
-      taskWho {
-        name
-      }
+      taskWho
     }
   }
 `;
 
 export function TasksScreen ({route, navigation}) {
-  const { loading, error, data , refetch } = useQuery(GET_ALL_TASKS);
-  console.log(data)
+  
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       refetch(); 
@@ -32,10 +29,11 @@ export function TasksScreen ({route, navigation}) {
       unsubscribe;
     };
   }, [navigation]);
-
-
-    if (loading) return <Text> 'Loading...';</Text>;
-    if (error) return <Text>`Error! ${error.message}`</Text>;
+  
+  
+  const { loading, error, data , refetch } = useQuery(GET_ALL_TASKS);
+  if (loading) return <Text> 'Loading...';</Text>;
+  if (error) return <Text>`Error! ${error.message}`</Text>;
     
   return (
     <ScrollView>

@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
 
 const taskSchema = new mongoose.Schema({
   taskName: String,
-  taskWho: Array,
+  taskWho: String,
   taskDesc: String, 
   startDate: String,
   interval: Number, 

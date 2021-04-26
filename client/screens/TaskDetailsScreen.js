@@ -30,34 +30,35 @@ const EDIT_TASK = gql `
 const GET_ALL_USERS = gql`
   query getAllUsers {
     getAllUsers {
-      tasks {
-        taskName
-      }
       name
-      id
+      id 
     }
   }
 `
 
 export function TaskDetailsScreen({route, navigation}) {
 
-  const { loading, error, data } = useQuery(GET_ALL_USERS);
-  // console.log("here:", data.getAllUsers[0].name)
   const [addTask, {load, err, taskData}] = useMutation(ADD_NEW_TASK);
   const [editTask, {loadtask, errtask, editData}] = useMutation(EDIT_TASK); 
-
+  
   console.log("route params", route.params)
   const {taskName, id, startDate, interval, taskWho} = route.params
-  console.log("this is taskwho array:", taskWho.taskWho)
+  console.log("this is taskwho array:", taskWho)
 
+
+  // console.log(data.getAllUsers)
+  
   const [title, setTitle] = React.useState(taskName === "" ? "New Task Name" : taskName.taskName);
   const [taskId, setTaskId] = React.useState((id === "") ? "" : id.id);
   const [taskStartDate, setTaskStartDate] = React.useState((startDate === "") ? moment() : startDate.startDate);
   const [taskInterval, setTaskInterval] = React.useState((interval === "") ? "7" : interval.interval);
   const [taskAlloc, setTaskAlloc] = React.useState((taskWho === "") ? "" : taskWho.taskWho); 
   console.log("taskAlloc:", taskAlloc)
-
-
+  
+  const { loading, error, data } = useQuery(GET_ALL_USERS);
+  if (loading ) return <Text>loading </Text>
+  if (error ) return <Text>{error}</Text>
+  
   const disableDates = (date) => {
     const today = moment(); 
     if (moment(date).isBefore(today)) return true;

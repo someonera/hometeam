@@ -100,37 +100,34 @@ const resolvers = {
 
   addUsersToEditTask: async (obj, args) => {
       try {
-        const taskCheck = await Task.findOne({_id: args.id});
-        const tempUser = await User.findOne({name: args.name});
-        // console.log(taskCheck.taskWho)
-        const oldName = taskCheck.taskWho === [] ? 0 : 1  //did this task previously have a user?
-        const oldUser = oldName ? await User.findOne({name: oldName}) : args.name;
-        console.log("oldUser tasks:", oldUser.tasks)
-        console.log(oldUser)
+        const taskCheck = await Task.findOne({_id: args.id}); /// this is the task that you got with this ID
 
-        console.log("this is check who", taskCheck.taskWho[0].name)
-        console.log("this is user:",tempUser)
-        if (taskCheck) {
-              const userAddedTask = await Task.findByIdAndUpdate(taskCheck.id, {
-                taskWho: tempUser
-              })
-          
-            if (!(tempUser.tasks).some(task => task.taskName === taskCheck.taskName)) { // if the new user didn't already have this task
-                  await User.findByIdAndUpdate(tempUser.id, {
-                  tasks:[...tempUser.tasks, taskCheck]
-              });
-              // console.log(taskToUser)
-            }
-          
-            if (oldUser !== tempUser) { // if this was a reallocation rather than a first allocation
-                const oldUserNewTasksArray = (oldUser.tasks).filter(task => task.taskName !== taskCheck.taskName) //remove the task from the other user
-                await User.findByIdAndUpdate(oldUser.id, {
-                  tasks: oldUserNewTasksArray
-                });
-              }
-          
-            return userAddedTask;
-        } // end of outer if statement
+        const tempUser = await User.findOne({name: args.name}); // this is the new user you're allocating the task to
+
+        console.log("taskWHo name:", taskCheck.taskWho); 
+        console.log("tempuser:", tempUser); 
+
+        // update the user name in the task 
+        const addedNameToTask = await Task.findByIdAndUpdate(args.id, {taskWho: args.name}, {new: true}); 
+
+        console.log(tempUser.tasks)
+        if (!(tempUser.tasks).some(task => task.taskName === taskCheck.taskName)) { // if the new user didn't already have this task
+          await User.findByIdAndUpdate(tempUser.id, {tasks:[...tempUser.tasks, addedNameToTask]}, {new: true});
+        }
+
+        if (taskCheck.taskWho !== undefined) {
+          console.log(taskCheck.taskWho)
+          console.log("hello"); 
+          if (taskCheck.taskWho !== tempUser.name) {
+            const oldUser = await User.findOne({name: taskCheck.taskWho}); 
+            const oldUserNewTasksArray = (oldUser.tasks).filter(task => task.taskName !== taskCheck.taskName) 
+            await User.findByIdAndUpdate(oldUser.id, {
+            tasks: oldUserNewTasksArray
+            }, {new: true});
+          }
+        }
+        return addedNameToTask;
+       // end of try statement
       } catch(err) {
         console.log(err);
         }

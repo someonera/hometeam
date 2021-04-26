@@ -25,6 +25,9 @@ export function TeamMatesScreen({routes, navigation}) {
   const { loading, error, data } = useQuery(GET_ALL_USERS);
   if (loading) return <Text> 'Loading...';</Text>;
   if (error) return <Text>`Error! ${error.message}`</Text>;
+
+console.log(data)
+
   return (
     <ScrollView>
       <Button
@@ -61,9 +64,9 @@ export function TeamMatesScreen({routes, navigation}) {
           <Text>MVP Awards: </Text>
         </View>
 
-        {/* {tasks.map((task) => {
+        {tasks.map((task) => {
           <Text key={task._id}> Current Tasks: {task.taskName}</Text>
-        })} */}
+        })}
       </Card>
       ))}
     </ScrollView>
