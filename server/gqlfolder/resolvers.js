@@ -79,15 +79,15 @@ const resolvers = {
 
   editTask: async (obj, args) => {
     try {
+
       const taskCheck = await Task.findOne({_id: args.id}); 
-      // const userCheck = await User.findOne({name: args.taskWho})
-      console.log(userCheck)
+
       if (taskCheck) {
         const editedTask = await Task.findByIdAndUpdate(taskCheck.id, {
           startDate: (args.startDate ? args.startDate : taskCheck.startDate), 
           taskName: (args.taskName ? args.taskName : taskCheck.taskName), 
           interval: (args.interval ? args.interval : taskCheck.interval), 
-          // taskWho: [userCheck],
+
         }
         ); 
         return editedTask; 
@@ -103,7 +103,8 @@ const resolvers = {
         const taskCheck = await Task.findOne({_id: args.id}); /// this is the task that you got with this ID
 
         const tempUser = await User.findOne({name: args.name}); // this is the new user you're allocating the task to
-
+        if (taskCheck.taskWho === args.name) return taskCheck
+        
         console.log("taskWHo name:", taskCheck.taskWho); 
         console.log("tempuser:", tempUser); 
 

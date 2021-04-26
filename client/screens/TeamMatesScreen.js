@@ -26,7 +26,6 @@ export function TeamMatesScreen({routes, navigation}) {
   if (loading) return <Text> 'Loading...';</Text>;
   if (error) return <Text>`Error! ${error.message}`</Text>;
 
-console.log(data)
 
   return (
     <ScrollView>
@@ -41,7 +40,6 @@ console.log(data)
     
 
       {data.getAllUsers.map(({name, id, tasks}) => (
-      
       <Card key={id}>
         <Card.Title>
           {name} 
@@ -57,6 +55,11 @@ console.log(data)
         </Card.Title>
   
         <Card.Divider/>
+          
+          <Text> Responsible For: </Text>
+          {tasks.map(({taskName}) => (
+            <Text key = {taskName}> {taskName} </Text>
+          ))}
         
         <View style={{position:"relative", alignItems:"center"}}> 
           <Icon name="smile" size={30}/>
@@ -64,9 +67,6 @@ console.log(data)
           <Text>MVP Awards: </Text>
         </View>
 
-        {tasks.map((task) => {
-          <Text key={task._id}> Current Tasks: {task.taskName}</Text>
-        })}
       </Card>
       ))}
     </ScrollView>

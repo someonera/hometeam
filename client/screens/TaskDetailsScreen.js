@@ -36,18 +36,26 @@ const GET_ALL_USERS = gql`
   }
 `
 
+const ADD_USER_TO_TASK = gql`
+  mutation addUsersToEditTask($id: ID!, $name: String) {
+    addUsersToEditTask(id: $id, name: $name) {
+      taskName
+      taskWho
+    }
+  }
+
+`
+
 export function TaskDetailsScreen({route, navigation}) {
 
   const [addTask, {load, err, taskData}] = useMutation(ADD_NEW_TASK);
   const [editTask, {loadtask, errtask, editData}] = useMutation(EDIT_TASK); 
-  
-  console.log("route params", route.params)
+  const [addUsersToEditTask, {loadd, errd, editUserData}] = useMutation(ADD_USER_TO_TASK); 
+
+
   const {taskName, id, startDate, interval, taskWho} = route.params
-  console.log("this is taskwho array:", taskWho)
 
 
-  // console.log(data.getAllUsers)
-  
   const [title, setTitle] = React.useState(taskName === "" ? "New Task Name" : taskName.taskName);
   const [taskId, setTaskId] = React.useState((id === "") ? "" : id.id);
   const [taskStartDate, setTaskStartDate] = React.useState((startDate === "") ? moment() : startDate.startDate);
@@ -56,8 +64,8 @@ export function TaskDetailsScreen({route, navigation}) {
   console.log("taskAlloc:", taskAlloc)
   
   const { loading, error, data } = useQuery(GET_ALL_USERS);
-  if (loading ) return <Text>loading </Text>
-  if (error ) return <Text>{error}</Text>
+  if (loading ) return <Text>loading </Text>;
+  if (error ) return <Text>{error}</Text>;
   
   const disableDates = (date) => {
     const today = moment(); 
@@ -72,6 +80,7 @@ export function TaskDetailsScreen({route, navigation}) {
     e.preventDefault(); 
     if (taskId) {
       editTask({variables: {id: taskId, taskName: title, startDate: taskStartDate, taskWho: taskAlloc, interval: parseInt(taskInterval)}});
+      addUsersToEditTask({variables: {id: taskId, name: taskAlloc}})
     } else {
       addTask({variables: {taskName: title, startDate: taskStartDate, taskWho: taskAlloc, interval: parseInt(taskInterval)}}); 
     }

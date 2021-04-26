@@ -45,6 +45,7 @@ export function TasksScreen ({route, navigation}) {
           Goal: {taskName}
           </Card.Title>
           <Text> every {interval} days</Text>
+          <Text> done by: {taskWho} </Text>
 
         <Button key={id}
         icon={<Icon name="edit-2"/>}
