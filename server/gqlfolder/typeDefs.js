@@ -34,8 +34,8 @@ type Game {
 
 input TaskInput {
   taskName: String
-  taskWho: String
-  done: Boolean
+  # taskWho: String
+  # done: Boolean
 }
 
 type Query {

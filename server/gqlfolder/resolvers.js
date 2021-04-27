@@ -91,6 +91,7 @@ const resolvers = {
       const gameCheck = await Game.findOne({endDate: {$gte: args.startDate}})
 
       console.log(gameCheck)
+
       if (!taskCheck) {
       const addedTask = await Task.create({
         taskName: args.taskName, 
@@ -101,9 +102,9 @@ const resolvers = {
       });
 
       if (gameCheck) {
-        await Game.findByIdAndUpdate(gameCheck.id, {
-          gameTasks: [...gameCheck.gameTasks, {taskName: args.taskName, taskWho: args.taskWho, done: false}]
-        })
+          await Game.findByIdAndUpdate(gameCheck.id, {
+          gameTasks: [...gameCheck.gameTasks, addedTask]
+        }
       }
       await User.findByIdAndUpdate(userCheck.id, {tasks: [...userCheck.tasks, addedTask]}, {new: true})
 
@@ -168,11 +169,23 @@ const resolvers = {
 
 
   newGame: async (obj, args) => {
+  // find all the tasks where the names are equal to the names of the taskwho 
+  // in the args input
+  
   try {
+    console.log(args.gameTasks)
+    const arrayOfTasks = []
+    for (const item of args.gameTasks) {
+      const waitingTask = await Task.findOne({taskName: item.taskName})
+      arrayOfTasks.push(waitingTask)
+    }
+    console.log(arrayOfTasks)
+
     const gameCheck = await Game.findOne({startDate: args.startDate})
     if (!gameCheck) {
-      const newGame = await Game.create({startDate: args.startDate, endDate: args.endDate, score: 0, gameTasks: args.gameTasks})
+      const newGame = await Game.create({startDate: args.startDate, endDate: args.endDate, score: 0, gameTasks: arrayOfTasks})
       return newGame
+      console.log("hey")
       } else {
         return gameCheck
       }

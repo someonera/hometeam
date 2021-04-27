@@ -23,8 +23,6 @@ const GET_GAME = gql`
     getGame(endDate: $endDate) {
       gameTasks {
         taskName
-        taskWho
-        
       }
       id
       startDate
@@ -63,7 +61,7 @@ export function GameScreen({route, navigation, game, setGame}) {
     console.log("listening", listening, filterData)
     if (gameData && !gameData.getGame && filterData && filterData.getAllTasks && !game) {
       console.log("this is filtered")
-      const removeType = filterData.getAllTasks.map((item) => item = {taskName: item.taskName, taskWho: item.taskWho, done: false})
+      const removeType = filterData.getAllTasks.map((item) => item = {taskName: item.taskName})
       
       if (!game)
       { newGame({variables: {startDate: mondaysDate, endDate: sundaysDate, gameTasks: removeType}})
