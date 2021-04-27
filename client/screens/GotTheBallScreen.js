@@ -41,10 +41,29 @@ const CHECK_UNCHECK = gql`
 export function GotTheBallScreen({route, navigation}) {
 
 const endOfWeek = moment().endOf('isoWeek')
-  
+const [tasks, setTasks] = useState([])
 const [checkUncheck, {loading: checkLoading, error: checkError, data: checkData}] = useMutation(CHECK_UNCHECK)
 const {loading, error, data, refetch} = useQuery(GET_GAME_WITH_FILTERED_TASKS, {variables: {endDate: endOfWeek}}) 
 
+useEffect(() => {
+  if (data) {
+  setTasks(data.getGame.gameTasks.filter(item => item.taskWho === thisUser))
+  }
+}, [data])
+
+const toggleCheck = async (mutationArgs) => {
+  await checkUncheck(mutationArgs)
+  setTasks((previousTasks) => {
+    const newTasks = previousTasks.map((task) => {
+      if (task.taskName === mutationArgs.variables.taskName) {
+        return {...task, done: !task.done}
+      } else {
+        return task
+      }
+    })
+    return newTasks
+  })
+}
 
 if (checkLoading) return <Text>  </Text>
 if (checkError) return <Text>{checkError}</Text>
@@ -53,44 +72,35 @@ if (loading) return <Text>  </Text>
 if (error) return <Text>{error}</Text>
 
 const thisUser = "Amalia"
-const tasksFilteredByName = data.getGame.gameTasks.filter(item => item.taskWho === thisUser)
-
 
 return (
-    <Card>
+<Card>
 
       <Text>You've got the Ball! </Text>
 
-{ tasksFilteredByName &&
+{ tasks &&
   
     <View>  
-    <Text>{thisUser} Has {tasksFilteredByName.length} Shots This Week: </Text>
+    <Text>{thisUser} Has {tasks.length} Shots This Week: </Text>
 
-      { tasksFilteredByName.map(({taskName, done}) => (
+      { tasks.map(({taskName, done}) => (
   
         <ListItem key={taskName}>
         <Text>{taskName}</Text>
 
-        {/* <CheckBox checked={thing}
-          checkedTitle="Score!"
-          onPress={() => {
-            checkUncheck({variables: {taskName: taskName, endDate: endOfWeek}})
-            setThing(done)
-          }}
-        /> */}
-        <CheckBoxComponent taskName={taskName} done={done} checkUncheck={checkUncheck}
-        refetch={refetch}
+        <CheckBoxComponent taskName={taskName} done={done} toggleCheck={toggleCheck}
         />
-
 
         </ListItem>
       ))
 
-      }
+      } 
   
     </View>     
-} 
+    } 
 
-    </Card>
-  )
-}
+  </Card>
+
+)
+
+  }
