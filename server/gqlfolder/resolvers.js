@@ -93,23 +93,25 @@ const resolvers = {
       console.log(gameCheck)
 
       if (!taskCheck) {
+
       const addedTask = await Task.create({
         taskName: args.taskName, 
         startDate: args.startDate,
         interval: args.interval, 
         taskWho: args.taskWho, 
         done: false
-      });
+        });
 
-      if (gameCheck) {
-          await Game.findByIdAndUpdate(gameCheck.id, {
-          gameTasks: [...gameCheck.gameTasks, addedTask]
+        if (gameCheck) {
+           await Game.findByIdAndUpdate(gameCheck.id, {gameTasks: [...gameCheck.gameTasks, addedTask]})
         }
-      }
-      await User.findByIdAndUpdate(userCheck.id, {tasks: [...userCheck.tasks, addedTask]}, {new: true})
 
-      return addedTask;
+        await User.findByIdAndUpdate(userCheck.id, {tasks: [...userCheck.tasks, addedTask]}, {new: true})
+  
+        return addedTask;
+
       }
+
     } catch (err) {
       return(err);
       }

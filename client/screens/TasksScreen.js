@@ -38,6 +38,9 @@ export function TasksScreen ({route, navigation}) {
   return (
     <ScrollView>
 
+    { data &&
+      <View>
+
       {data.getAllTasks.map(({taskName, id, interval, startDate, taskWho}) => (
         <Card key={id}> 
 
@@ -63,6 +66,8 @@ export function TasksScreen ({route, navigation}) {
         </Card>
       ))}
 
+      </View>
+}
       <FAB
         icon ={<Icon name="plus"/>}
         onPress={() => {
