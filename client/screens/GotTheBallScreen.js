@@ -1,25 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import {Text, View} from 'react-native'
-import {Card} from 'react-native-elements'
+import {Card, CheckBox} from 'react-native-elements'
 import { gql, useQuery, useMutation } from "@apollo/client";
 import moment from 'moment'
 
-const GET_MY_TASKS_FOR_THIS_WEEK = gql`
-  query getGame($endDate: String!) {
-    getGame(endDate: $endDate) {
-      startDate
-      gameTasks {
-        taskName
-        taskWho
-        done
-      }
-    }
-  }
-`
 
-const FILTER_BY_NAME = gql`
-  query getAllTasks($name: String) {
-    getAllTasks(name: $name) {
+
+const ALL_TASKS_BY_NAME = gql`
+  query getAllTasks ($mon: String, $sun: String, $taskWho: String) {
+    getAllTasks (mon: $mon, sun: $sun, taskWho: $taskWho) {
+      taskName
+      taskWho
       done
     }
   }
@@ -36,17 +27,28 @@ const FILTER_BY_NAME = gql`
 
 export function GotTheBallScreen({route, navigation}) {
 
-const {loading, error, data} = useQuery(GET_MY_TASKS_FOR_THIS_WEEK, {variables: {endDate: moment().endOf('isoWeek')}})
-const {loading: nameFilterLoading, 
-        error: nameFilterError, 
-        data: nameFilterData} = useQuery(FILTER_BY_NAME, {variables: {name: "Rosie"}})
-  console.log(data)
+const {loading, error, data} = useQuery(ALL_TASKS_BY_NAME, {variables: {
+  mon: moment().startOf('isoWeek'), 
+  sun: moment().endOf('isoWeek'), 
+  taskWho: "Rosie"
+}})
 
-  console.log(nameFilterData)
+  console.log(data)
 return (
     <Card>
 
-        <Text>I've got the Ball! </Text>
+      
+      <Text>I've got the Ball! </Text>
+      {data.getAllTasks.map(({done, taskName}) => (
+
+        <View flexDirection={"row"}>
+        <Text>{taskName}</Text>
+        <CheckBox></CheckBox>
+        </View>
+      ))}
+      
+  
+
 
     </Card>
   )

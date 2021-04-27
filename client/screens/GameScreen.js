@@ -103,6 +103,7 @@ export function GameScreen({route, navigation, game, setGame}) {
       <Text>
         score: {game.score}
       </Text>
+      {/* <GameTaskComponent game={game}></GameTaskComponent> */}
       </View>
    }
       <Card.Divider/>
@@ -114,7 +115,6 @@ export function GameScreen({route, navigation, game, setGame}) {
         ) 
       )} */}
 
-      {/* <GameTaskComponent game={game}></GameTaskComponent> */}
 
     <Card.Divider/>
 

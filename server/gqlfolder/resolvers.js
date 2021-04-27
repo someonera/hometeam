@@ -35,13 +35,13 @@ const resolvers = {
 
   getAllTasks: async (obj, args) => {
     try {
-      if (args.mon && args.sun) {
+      if (args.mon && args.sun && !args.taskWho) {
         const unfiltered = await Task.find({})
         const filtered = unfiltered.filter(task => (task.startDate > args.mon & task.startDate < args.sun))   
         return filtered   
-      } else if (args.name) {
+      } else if (args.mon && args.sun && args.taskWho) {
         const all = await Task.find({})
-        const filteredByName = all.filter(task => (task.taskWho === args.name))
+        const filteredByName = all.filter(task => (task.taskWho === args.taskWho))
         return filteredByName
       } else { 
       allTasks = await Task.find({});

@@ -42,7 +42,7 @@ type Query {
   getUser(name:String!): [User!]
   getAllUsers: [User!]
   getTask(taskName:String!):[Task!]
-  getAllTasks(mon: String, sun: String, name: String, done: Boolean): [Task!]
+  getAllTasks(mon: String, sun: String, taskWho: String, done: Boolean): [Task!]
   getGame(endDate: String!): Game
 }
 
