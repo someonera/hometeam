@@ -60,7 +60,7 @@ export function TaskDetailsScreen({route, navigation}) {
   const [taskId, setTaskId] = React.useState((id === "") ? "" : id.id);
   const [taskStartDate, setTaskStartDate] = React.useState((startDate === "") ? moment() : startDate.startDate);
   const [taskInterval, setTaskInterval] = React.useState((interval === "") ? "7" : interval.interval);
-  const [taskAlloc, setTaskAlloc] = React.useState((taskWho === "") ? "Sophie" : taskWho.taskWho); 
+  const [taskAlloc, setTaskAlloc] = React.useState((taskWho === "") ? "Parent" : taskWho.taskWho); 
   
   const { loading, error, data } = useQuery(GET_ALL_USERS);
   if (loading ) return <Text>loading </Text>;
@@ -112,7 +112,7 @@ export function TaskDetailsScreen({route, navigation}) {
             setTaskInterval(itemValue)
           }>
             {/* <Picker.Item label="once" value="0"/> */}
-            <Picker.Item label="daily" value="1" />
+            {/* <Picker.Item label="daily" value="1" /> */}
             <Picker.Item label="weekly" value="7" />
             <Picker.Item label="fortnightly" value="14" />
             <Picker.Item label="monthly" value="28" />

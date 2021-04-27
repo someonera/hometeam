@@ -5,6 +5,8 @@ import { gql, useQuery, useMutation } from "@apollo/client";
 import moment from 'moment'
 import {Card } from 'react-native-elements'
 import GameTaskComponent from '../components/GameTaskComponent'
+import Icon from "react-native-vector-icons/Feather";
+
 
 const NEW_GAME = gql`
   mutation newGame($startDate: String!, $endDate: String!, $gameTasks: [TaskInput]) {
@@ -84,7 +86,7 @@ export function GameScreen({route, navigation}) {
     } 
 
   return (
-    <Card containerStyle={{height:"95%"}}>
+    <Card containerStyle={{height:"97%"}}>
       <Text style={gameStyles.text}>  </Text>
 
     { game &&
@@ -129,6 +131,10 @@ export function GameScreen({route, navigation}) {
 
         </View>
 
+    <View style={{marginTop: 20}}>
+      { game.gameTasks.length === game.score ? 
+        <Icon name={"award"} size={200} color={"gold"}/> : null }
+    </View>
 
       </View>
 

@@ -5,6 +5,8 @@ import { gql, useQuery, useMutation } from "@apollo/client";
 import moment from 'moment'
 import CheckBoxComponent from '../components/CheckBoxComponent'
 const styles = require('../styles/styles')
+import {Picker} from '@react-native-picker/picker';
+
 
 // const ALL_TASKS_BY_NAME = gql`
 //   query getAllTasks ($mon: String, $sun: String, $taskWho: String) {
@@ -40,8 +42,18 @@ const CHECK_UNCHECK = gql`
 
 export function GotTheBallScreen({route, navigation}) {
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      refetch(); 
+    });
+    return () => {
+      unsubscribe;
+    };
+  }, [navigation]);
+
 const endOfWeek = moment().endOf('isoWeek')
 const [tasks, setTasks] = useState([])
+// const [thisUser, setThisUser] = useState("")
 const [checkUncheck, {loading: checkLoading, error: checkError, data: checkData}] = useMutation(CHECK_UNCHECK)
 const {loading, error, data, refetch} = useQuery(GET_GAME_WITH_FILTERED_TASKS, {variables: {endDate: endOfWeek}}) 
 
@@ -50,6 +62,10 @@ useEffect(() => {
   setTasks(data.getGame.gameTasks.filter(item => item.taskWho === thisUser))
   }
 }, [data])
+
+// useEffect(() => {
+  
+// }, [thisUser])
 
 const toggleCheck = async (mutationArgs) => {
   await checkUncheck(mutationArgs)
@@ -71,11 +87,27 @@ if (checkError) return <Text>{checkError}</Text>
 if (loading) return <Text>  </Text>
 if (error) return <Text>{error}</Text>
 
-const thisUser = "Rosie"
-
+const thisUser = "Little Kid"
 
 return (
 <Card>
+
+{/* <Picker
+  style={styles.picker}
+  itemStyle={{height: 110}}
+  selectedValue={thisUser}
+  onValueChange={(itemValue) => {
+    setThisUser(itemValue)
+    refetch()
+    // toggleCheck()
+  }
+  }
+>
+  <Picker.Item label="Little Kid" value="Little Kid"/>
+  <Picker.Item label="Big Kid" value="Big Kid"/>
+  <Picker.Item label="Parent" value="Parent"/>
+
+  </Picker> */}
 
 
 { tasks &&

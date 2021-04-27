@@ -49,9 +49,9 @@ export function UserDetailsScreen({route, navigation}) {
         </SafeAreaView>
   
     
-    <Button title={"Save Changes"}></Button>
-    <Button title={"Discard Changes"} onPress={() => navigation.navigate("TeamMates")}></Button>
-    <Button title={"Delete This User"}/>
+    <Button title={"Save Changes"} style={{margin: 10}}></Button>
+    <Button title={"Discard Changes"} style={{margin: 10}} onPress={() => navigation.navigate("TeamMates")}></Button>
+    <Button title={"Delete This User"} style={{margin: 10}}/>
 
     </Card>
   );

@@ -55,7 +55,7 @@ export function HomeScreen({navigation, route}) {
 
       </ListItem>
       <ListItem
-          Component={TouchableHighlight}
+          Component={TouchableOpacity}
           onPress={() => {
           navigation.navigate("TeamMates");
         }}

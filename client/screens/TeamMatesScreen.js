@@ -43,7 +43,15 @@ export function TeamMatesScreen({routes, navigation}) {
     <ScrollView>
       
       {data.getAllUsers.map(({name, id, tasks}) => (
-      <ListItem key={id}>
+      <ListItem key={id}
+        Component={TouchableOpacity} 
+        onPress={() => {
+          navigation.navigate("UserDetails", {
+            name: {name}
+          })
+        }}
+      
+      >
         <View style={{flexDirection: "row", alignItems:"center", justifyContent: "space-between"}}>
             <Icon name="user" size={40} color="lightgreen" />
             <ListItem.Title style={styles.listItem}>
@@ -58,8 +66,8 @@ export function TeamMatesScreen({routes, navigation}) {
                 <Text key = {taskName}> {taskName} </Text>
                 ))}
            </View>
-          <View>
-    
+      <View>
+           
                 </View>
            </View>
       </ListItem>
