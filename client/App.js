@@ -42,33 +42,12 @@ function TeamStack() {
 function TasksStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name ="Tasks" component={TasksScreen}/>
-      <Stack.Screen name="TaskDetails" component={TaskDetailsScreen}/>
+      <Stack.Screen name ="Our Goals" component={TasksScreen}/>
+      <Stack.Screen name="Goal Details" component={TaskDetailsScreen}/>
     </Stack.Navigator>
   );
 }
 
-function GameStack() {
-
-  const [game, setGame] = useState(false)
-
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="ThisGame"> 
-      {(props) => (<GameScreen game={game} setGame={setGame} {...props}/>)
-      }
-      </Stack.Screen>
-    </Stack.Navigator>
-  )
-}
-
-function StatsStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="PastStats" component={StatsScreen}/> 
-    </Stack.Navigator>
-  )
-}
 
 export default function App() {
   return (
@@ -79,8 +58,8 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="TasksTabs" component={TasksStack} />
         <Stack.Screen name="TeamMates" component={TeamStack} />
-        <Stack.Screen name="Game" component={GameStack}/> 
-        <Stack.Screen name="Stats" component={StatsStack}/>
+        <Stack.Screen name="This Week's Match" component={GameScreen}/>
+        <Stack.Screen name="PastStats" component={StatsScreen}/> 
         <Stack.Screen name="GotTheBall" component={GotTheBallScreen}/>
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from "react";
-import { Text, View } from "react-native"
+import { Text, View, StyleSheet} from "react-native"
 import { gql, useQuery, useMutation } from "@apollo/client";
 import moment from 'moment'
 import {Card } from 'react-native-elements'
@@ -44,11 +44,12 @@ const GET_FILTERED_TASKS = gql`
 
 // const [game, setGame] = useState(false)
 
-export function GameScreen({route, navigation, game, setGame}) {
+export function GameScreen({route, navigation}) {
 
   const mondaysDate = moment().startOf('isoWeek')
   const sundaysDate = moment().endOf('isoWeek')
   const [listening, setListening] = useState(false)
+  const [game, setGame] = useState(false)
 
   const {loading, error, data: gameData} = useQuery(GET_GAME, {variables: {endDate: sundaysDate}})  
   const [newGame, {loading: newLoading, error: newError, data: newData}] = useMutation(NEW_GAME) 
@@ -82,30 +83,80 @@ export function GameScreen({route, navigation, game, setGame}) {
 
   return (
     <Card containerStyle={{height:"95%"}}>
-      <Text> Home VS House </Text>
+      <Text style={gameStyles.text}>  </Text>
 
       <Card.Divider/>
-{ game &&
-    <View>
+    { game &&
+      <View>
+
       <Text>
-        {moment(game.startDate).format('dddd, MMMM Do YYYY')}
-        </Text>
-      <Card.Divider/>
-      <Text>
-        {moment(game.endDate).format('dddd, MMMM Do YYYY')}
+        {moment(game.startDate).format('dddd, MMMM Do YYYY')} - {
+        moment(game.endDate).format('dddd, MMMM Do YYYY')}
       </Text>
       <Card.Divider/>
-      <Text>
-        score: {game.score} 
-      </Text>
+
+      <View style={{
+            flexDirection: "row", 
+            justifyContent: "center"
+          }}> 
+          <View style={{
+            flexDirection: "row", 
+            justifyContent: "space-around"
+          }}>
+            <Text style={gameStyles.homeTeam}>HOME</Text>
+            <Text style={gameStyles.homeScore}>{game.score}</Text>
+          </View>
+          <Text style={gameStyles.center}> / </Text>
+          <View style={{
+            flexDirection: "row", 
+            justifyContent: "space-around"
+          }}>
+            <Text style={gameStyles.awayScore}>{game.gameTasks.length-game.score}</Text>
+            <Text style={gameStyles.awayTeam}>HOUSE </Text>
+          </View>
+
+      </View>
+
+
       </View>
    }
       <Card.Divider/>
       
-
 
     <Card.Divider/>
 
     </Card>
   )
 }
+
+const gameStyles = StyleSheet.create({
+  text: {
+    fontSize: 40
+  }, 
+  homeScore: {
+    fontSize: 70, 
+    color: "white",
+    backgroundColor: "lightgreen",
+    padding: 25
+  }, 
+  awayScore: {
+    fontSize: 70, 
+    color: "white",
+    backgroundColor: "#f5425d", 
+    padding: 25,
+  }, 
+  center: {
+    fontSize: 70, 
+    color: "black", 
+    padding: 1, 
+    margin: 1
+  }, 
+  homeTeam: {
+    color: "lightgreen", 
+    padding: 20
+  }, 
+  awayTeam: {
+    color: "#f5425d", 
+    padding: 20
+  }
+})

@@ -71,7 +71,8 @@ if (checkError) return <Text>{checkError}</Text>
 if (loading) return <Text>  </Text>
 if (error) return <Text>{error}</Text>
 
-const thisUser = "Amalia"
+const thisUser = "Rosie"
+
 
 return (
 <Card>
@@ -81,7 +82,7 @@ return (
 { tasks &&
   
     <View>  
-    <Text>{thisUser} Has {tasks.length} Shots This Week: </Text>
+    <Text>{thisUser} Has {tasks.length} Goals This Week: </Text>
 
       { tasks.map(({taskName, done}) => (
   

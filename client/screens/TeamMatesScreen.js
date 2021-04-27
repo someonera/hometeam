@@ -4,7 +4,7 @@ import React, { useEffect, useState, useLayoutEffect } from "react";
 import { ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
 const styles = require("../styles/styles");
 import { gql, useQuery } from "@apollo/client";
-import {Button , Card} from "react-native-elements";
+import {Button , Card, FAB} from "react-native-elements";
 import Icon from "react-native-vector-icons/Feather";
 
 
@@ -38,19 +38,15 @@ export function TeamMatesScreen({routes, navigation}) {
 
 
   return (
+
+    <View>
     <ScrollView>
-      <Button
-        buttonStyle={{width: 150}}
-        icon={<Icon name="plus"/>}
-        title = "  New TeamMate"
-        onPress={() => {
-          navigation.navigate("AddTeamMate");
-        }}
-      />
+      
     
 
       {data.getAllUsers.map(({name, id, tasks}) => (
       <Card key={id}>
+          {/* <Icon name="smile" size={30} color="lightgreen" /> */}
         <Card.Title>
           {name} 
         <Button 
@@ -66,19 +62,27 @@ export function TeamMatesScreen({routes, navigation}) {
   
         <Card.Divider/>
           
-          <Text> Skills </Text>
+          <Text> {name}'s Skills: </Text>
           {tasks.map(({taskName}) => (
             <Text key = {taskName}> {taskName} </Text>
           ))}
         
         <View style={{position:"relative", alignItems:"center"}}> 
-          <Icon name="smile" size={30}/>
-          <Text>All Time Goals: </Text>
-          <Text>MVP Awards: </Text>
         </View>
 
       </Card>
       ))}
     </ScrollView>
+
+    <FAB
+        style={styles.fab}
+        icon={<Icon name="plus" size={20} color="white"/>}
+        title = "ADD NEW"
+        onPress={() => {
+          navigation.navigate("AddTeamMate");
+        }}
+      />
+
+    </View>
   );
 }

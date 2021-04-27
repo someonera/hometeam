@@ -36,6 +36,8 @@ export function TasksScreen ({route, navigation}) {
   if (error) return <Text>`Error! ${error.message}`</Text>;
     
   return (
+
+    <View>
     <ScrollView>
 
     { data &&
@@ -53,7 +55,7 @@ export function TasksScreen ({route, navigation}) {
         <Button key={id}
         icon={<Icon name="edit-2"/>}
         onPress={() => {
-          navigation.navigate("TaskDetails", {
+          navigation.navigate("Goal Details", {
             taskName: {taskName}, 
             id: {id}, 
             interval: {interval}, 
@@ -67,11 +69,16 @@ export function TasksScreen ({route, navigation}) {
       ))}
 
       </View>
-}
+    }
+
+    </ScrollView> 
+
       <FAB
-        icon ={<Icon name="plus"/>}
+        style={styles.fab}
+        icon ={<Icon name="plus" color="white" size={20}/>}
+        title={"NEW GOAL"}
         onPress={() => {
-          navigation.navigate("TaskDetails", {
+          navigation.navigate("Goal Details", {
             taskName: "", 
             id: "",
             interval: "", 
@@ -80,8 +87,8 @@ export function TasksScreen ({route, navigation}) {
           });
         }}
       />
+      </View>
 
-    </ScrollView>
   );
   
 }

@@ -3,21 +3,26 @@ import {TouchableHighlight} from "react-native";
 
 export const theme = {
   colors: {
-    primary: "pink", 
-    secondary: "green"
+    primary: "lightgreen", 
+    secondary: "#f5425d"
   }, 
+  CheckBox: {
+    checkedColor: "#f5425d", 
+    size: 50
+  },
 
 
   Button: {
     raised: false,
     buttonStyle: {
-      width: 50
+      width: 150
     },
     containerStyle: {
       // margin: 2
     }, 
     titleStyle: {
-      fontSize:13
+      fontSize: 15,
+      fontWeight: "bold"
     }
   },
 
@@ -41,6 +46,8 @@ export const theme = {
       borderRadius: 10
     }
   }, 
+
+
 
 
 };

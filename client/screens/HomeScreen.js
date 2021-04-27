@@ -22,7 +22,7 @@ export function HomeScreen({navigation, route}) {
           navigation.navigate("TeamMates");
         }}
       >
-        <Icon name="user" size={30} color="green"/>
+        <Icon name="user" size={50} color="lightgreen"/>
 
         <ListItem.Content>
           <ListItem.Title>
@@ -40,7 +40,7 @@ export function HomeScreen({navigation, route}) {
         onPress={() => {
           navigation.navigate("TasksTabs");
         }} color="1ACDA5#" > 
-        <Icon name="dribbble" size={30} color="green"/>
+        <Icon name="dribbble" size={50} color="lightgreen"/>
         <ListItem.Content>
           <ListItem.Title>
             Our Goals
@@ -55,10 +55,10 @@ export function HomeScreen({navigation, route}) {
       <ListItem
         Component={TouchableOpacity}
         onPress={() => {
-          navigation.navigate("Game")
+          navigation.navigate("This Week's Match")
         }}
       >
-      <Icon name="eye" size={30} color="green"/>
+      <Icon name="eye" size={50} color="lightgreen"/>
         <ListItem.Content>
           <ListItem.Title>
             This Week's Match
@@ -77,7 +77,7 @@ export function HomeScreen({navigation, route}) {
           navigation.navigate("Stats")
         }}
       >
-      <Icon name="eye" size={30} color="green"/>
+      <Icon name="eye" size={50} color="lightgreen"/>
         <ListItem.Content>
           <ListItem.Title>
             Stats!
@@ -96,7 +96,7 @@ export function HomeScreen({navigation, route}) {
         }}
       >
 
-      <Icon name="alert-triangle" size={30} color="green"/>
+      <Icon name="dribbble" size={50} color="lightgreen"/>
         <ListItem.Content>
           <ListItem.Title>
             I've Got The Ball

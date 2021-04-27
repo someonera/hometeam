@@ -18,7 +18,7 @@ export default function CheckBoxComponent (props) {
 
     <View>
       <CheckBox checked={done}
-          checkedTitle="Score!"
+          checkedTitle={"Score!"}
           onIconPress={tick}
       />
 

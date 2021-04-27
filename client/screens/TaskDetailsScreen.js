@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from "react";
-import { ScrollView, Text, View, TextInput, SafeAreaView , Alert} from "react-native";
+import { StyleSheet, ScrollView, Text, View, TextInput, SafeAreaView , Alert} from "react-native";
 import {Switch, Card, Button, CheckBox, Input} from "react-native-elements";
 const styles = require("../styles/styles");
 import { gql, useQuery, useMutation } from "@apollo/client";
@@ -80,32 +80,30 @@ export function TaskDetailsScreen({route, navigation}) {
     if (taskId) {
       editTask({variables: {id: taskId, taskName: title, startDate: taskStartDate, taskWho: taskAlloc, interval: parseInt(taskInterval)}});
       addUsersToEditTask({variables: {id: taskId, name: taskAlloc}})
+      navigation.navigate("Our Goals")
     } else {
       addTask({variables: {taskName: title, startDate: taskStartDate, taskWho: taskAlloc, interval: parseInt(taskInterval)}}); 
+      navigation.navigate("Our Goals")
     }
   };
 
   return (
-    <ScrollView>
     <Card containerStyle={{height:"95%"}}>
         
+      <SafeAreaView>
+      <TextInput 
+        fontSize={35}
+        styles={styles.textInput}
+        value={title}
+        onChangeText={setTitle}
+      />
+    </SafeAreaView>
 
     <View style={{ 
         flexDirection: "row", 
         // alignItems: "center", 
-        justifyContent: "space-between"
+        justifyContent: "space-around"
         }}>
-          <SafeAreaView>
-          <TextInput 
-            styles={styles.input}
-            value={title}
-            onChangeText={setTitle}
-          />
-        </SafeAreaView>
-      
-
-        <Switch></Switch>
-    </View>
     <Picker
           style={styles.picker}
           itemStyle={{height: 110}}
@@ -114,10 +112,10 @@ export function TaskDetailsScreen({route, navigation}) {
             setTaskInterval(itemValue)
           }>
             {/* <Picker.Item label="once" value="0"/> */}
-            <Picker.Item label="every day" value="1" />
-            <Picker.Item label="every week" value="7" />
-            <Picker.Item label="every two weeks" value="14" />
-            <Picker.Item label="every month" value="28" />
+            <Picker.Item label="daily" value="1" />
+            <Picker.Item label="weekly" value="7" />
+            <Picker.Item label="fortnightly" value="14" />
+            <Picker.Item label="monthly" value="28" />
 
       </Picker>
 
@@ -132,25 +130,29 @@ export function TaskDetailsScreen({route, navigation}) {
         ))}
 
     </Picker> 
+      
+    </View>
   
     <Card.Divider/>
 
-    <Text> Select Start Date: </Text>
     <CalendarPicker
       selectedStartDate={taskStartDate}
       // disabledDates={disableDates}
       onDateChange={onDateChange}
     ></CalendarPicker>
 
-    <View
-    flexDirection= "row"
-    >
-    <Button title={"Save Changes"} onPress={submit}></Button>
-    <Button title={"Discard Changes"} onPress={() => navigation.navigate("Tasks")}></Button>
+    <Card.Divider/>
 
-    </View>
+      <View style={{
+        flexDirection: "row", 
+        justifyContent: "space-around"
+        }}>
+        <Button title={"Save Changes"} onPress={submit}></Button>
+        <Button title={"Discard Changes"} onPress={() => navigation.navigate("Our Goals")}></Button>
+
+      </View>
 
     </Card>
-    </ScrollView>
   );
 }
+

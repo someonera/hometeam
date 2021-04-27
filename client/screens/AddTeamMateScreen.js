@@ -4,9 +4,6 @@ const styles = require("../styles/styles");
 import {gql, useMutation } from "@apollo/client";
 import { Button, Card } from "react-native-elements";
 
-/// either GET an existing user if you're coming from a user name 
-/// or Have the details blank if you're coming from "Add user"
-
 
 const ADD_NEW_USER = gql `
   mutation addUser ($name: String!) {
@@ -26,6 +23,7 @@ export function AddTeamMateScreen({route, navigation}) {
     e.preventDefault();
     console.log(input);
     addUser({variables: {name : input}});
+    navigation.navigate("TeamMates")
   };
 
   return (
@@ -41,16 +39,13 @@ export function AddTeamMateScreen({route, navigation}) {
         value = {input}
         onChangeText = {setInput} 
       />
-
-            <Card.Divider/>
         
-        </SafeAreaView>
+  </SafeAreaView>
   
     
   <Card.Divider/>
-    <Text>You could add tasks to the user here </Text>    
-    <Button title={"Add"} onPress={submit}></Button>
-    <Button title={"Discard Changes"}></Button>
+    <Button title={"Add"} onPress={submit} ></Button>
+    <Button title={"Discard Changes"} onPress={() => navigation.navigate("TeamMates")}></Button>
 
     </Card>
 

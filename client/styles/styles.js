@@ -16,15 +16,31 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   input: {
-    fontSize: 10, 
+    fontSize: 40, 
     
   },
   picker: {
     fontSize:20,
-    width: "80%"
+    width: "40%"
+  }, 
+  textInput: {
+    fontSize: 50
+  }, 
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    bottom: 0,
+    right: 0
+  }, 
+
+  thingButton: {
+    position: 'relative', 
+    bottom: 5  
   }
+
+
 
 });
 
-
 module.exports = styles; 
+
