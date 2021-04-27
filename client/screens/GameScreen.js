@@ -58,27 +58,22 @@ export function GameScreen({route, navigation, game, setGame}) {
   
   useEffect(() => {
     // console.log(game)
-    console.log("listening", listening, filterData)
     if (gameData && !gameData.getGame && filterData && filterData.getAllTasks && !game) {
-      console.log("this is filtered")
       const removeType = filterData.getAllTasks.map((item) => item = {taskName: item.taskName})
       
       if (!game)
       { newGame({variables: {startDate: mondaysDate, endDate: sundaysDate, gameTasks: removeType}})
       .then((newData)=> {
-        console.log("this is new:")
         setGame(newData.data.newGame)
       })}
     }
   }, [listening])
   
   useEffect(() => {
-    console.log("game:", game)
   }, [game])
   
   // console.log(game)
     if (gameData && !listening && filterData) { 
-      console.log("gameData HERE")
       if (gameData.getGame) {
         setGame(gameData.getGame)
       }
@@ -103,17 +98,10 @@ export function GameScreen({route, navigation, game, setGame}) {
       <Text>
         score: {game.score} 
       </Text>
-      {/* <GameTaskComponent game={game}></GameTaskComponent> */}
       </View>
    }
       <Card.Divider/>
       
-      {/* HOW DO I DO THIS?? */}
-      {/* this doesn't work when the game renders for the first time */}
-      {/* {game.gameTasks.map(({taskName, taskWho}) => (
-        <Text key={taskName}>{taskName} - {taskWho} </Text>
-        ) 
-      )} */}
 
 
     <Card.Divider/>

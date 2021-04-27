@@ -197,9 +197,7 @@ const resolvers = {
 
     checkTask: async (obj, args) => {
       try {
-        console.log(args)
         const game = await Game.findOne({endDate: args.endDate})
-        console.log(game.score)
         let toggle
         let scoreUpdate = game.score
         const editTasks = game.gameTasks.map((item) => {

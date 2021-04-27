@@ -5,29 +5,26 @@ import moment from 'moment'
 
 export default function CheckBoxComponent (props) {
 
-  const {done, taskName, checkUncheck} = props
-  console.log("done", done)
+  const {done, taskName, checkUncheck, refetch} = props
 
   const endOfWeek = moment().endOf('isoWeek')
 
-  
   useEffect(() => {
-    setCheckState(done)
-    console.log("hello")
-  }, [])
-  const [checkState, setCheckState] = React.useState()
+    refetch()
+  }, [done])
+
+  const [firstTime, setFirstTime] = React.useState(true)
+  const [checkState, setCheckState] = React.useState(done)
   
   const tick = () => {
+    checkUncheck({variables: {taskName: taskName, endDate: endOfWeek}})
     // setCheckState(!checkState)
-    checkUncheck({variables: {taskName: taskName, endDate: endOfWeek}}).then(result => setCheckState(result))
-    // console.log("bool", bool)
-    // setCheckState(bool)
   }
 
   return (
     
     <View>
-      <CheckBox checked={checkState} title={taskName}
+      <CheckBox checked={done}
           checkedTitle="Score!"
           onIconPress={tick}
       />
