@@ -39,6 +39,10 @@ const resolvers = {
         const unfiltered = await Task.find({})
         const filtered = unfiltered.filter(task => (task.startDate > args.mon & task.startDate < args.sun))   
         return filtered   
+      } else if (args.name) {
+        const all = await Task.find({})
+        const filteredByName = all.filter(task => (task.taskWho === args.name))
+        return filteredByName
       } else { 
       allTasks = await Task.find({});
       return allTasks;
@@ -51,9 +55,11 @@ const resolvers = {
   getGame: async (obj, args) => {
     try {
       // console.log(args.endDate)
+
       const thisGame = await Game.findOne({endDate: args.endDate})
-      // console.log(thisGame)
+
       return thisGame
+
     } catch (err) {
       console.log(err)
     }
@@ -91,11 +97,12 @@ const resolvers = {
         startDate: args.startDate,
         interval: args.interval, 
         taskWho: args.taskWho, 
+        done: false
       });
 
       if (gameCheck) {
         await Game.findByIdAndUpdate(gameCheck.id, {
-          gameTasks: [...gameCheck.gameTasks, {taskName: args.taskName, taskWho: args.taskWho}]
+          gameTasks: [...gameCheck.gameTasks, {taskName: args.taskName, taskWho: args.taskWho, done: false}]
         })
       }
       await User.findByIdAndUpdate(userCheck.id, {tasks: [...userCheck.tasks, addedTask]}, {new: true})
@@ -164,7 +171,7 @@ const resolvers = {
   try {
     const gameCheck = await Game.findOne({startDate: args.startDate})
     if (!gameCheck) {
-      const newGame= await Game.create({startDate: args.startDate, endDate: args.endDate, score: 0, gameTasks: args.gameTasks})
+      const newGame = await Game.create({startDate: args.startDate, endDate: args.endDate, score: 0, gameTasks: args.gameTasks})
       return newGame
       } else {
         return gameCheck

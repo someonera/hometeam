@@ -95,7 +95,7 @@ export function HomeScreen({navigation, route}) {
           navigation.navigate("GotTheBall")
         }}
       >
-        
+
       <Icon name="alert-triangle" size={30} color="green"/>
         <ListItem.Content>
           <ListItem.Title>

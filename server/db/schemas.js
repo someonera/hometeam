@@ -15,6 +15,7 @@ const taskSchema = new mongoose.Schema({
   taskDesc: String, 
   startDate: String,
   interval: Number, 
+  done: Boolean
 });
 
 const gameSchema = new mongoose.Schema({

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import  ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import 'react-native-gesture-handler';
@@ -49,9 +49,15 @@ function TasksStack() {
 }
 
 function GameStack() {
+
+  const [game, setGame] = useState(false)
+
   return (
     <Stack.Navigator>
-      <Stack.Screen name="ThisGame" component={GameScreen}/> 
+      <Stack.Screen name="ThisGame"> 
+      {(props) => (<GameScreen game={game} setGame={setGame} {...props}/>)
+      }
+      </Stack.Screen>
     </Stack.Navigator>
   )
 }

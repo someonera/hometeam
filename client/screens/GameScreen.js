@@ -44,12 +44,12 @@ const GET_FILTERED_TASKS = gql`
   }
 `
 
+// const [game, setGame] = useState(false)
 
-export function GameScreen({route, navigation}) {
+export function GameScreen({route, navigation, game, setGame}) {
 
   const mondaysDate = moment().startOf('isoWeek')
   const sundaysDate = moment().endOf('isoWeek')
-  const [game, setGame] = useState(false)
   const [listening, setListening] = useState(false)
 
   const {loading, error, data: gameData} = useQuery(GET_GAME, {variables: {endDate: sundaysDate}})  
@@ -57,31 +57,43 @@ export function GameScreen({route, navigation}) {
   const {loading: filterLoading, error: filterError, data: filterData} = useQuery(GET_FILTERED_TASKS, {variables: {mon: mondaysDate, sun: sundaysDate}})
   // console.log("filter data", removeType)
   
-  if (gameData && !listening) { 
-    console.log("gameData HERE", gameData)
-    setGame(gameData.getGame)
-    setListening(true)
-  } 
   
   useEffect(() => {
-    if (gameData && !gameData.getGame && filterData && filterData.getAllTasks) {
-      const removeType = filterData.getAllTasks.map((item) => item = {taskName: item.taskName, taskWho: item.taskWho})
-      newGame({variables: {startDate: mondaysDate, endDate: sundaysDate, gameTasks: removeType}})
+    // console.log(game)
+    console.log("listening", listening, filterData)
+    if (gameData && !gameData.getGame && filterData && filterData.getAllTasks && !game) {
+      console.log("this is filtered")
+      const removeType = filterData.getAllTasks.map((item) => item = {taskName: item.taskName, taskWho: item.taskWho, done: false})
+      
+      if (!game)
+      { newGame({variables: {startDate: mondaysDate, endDate: sundaysDate, gameTasks: removeType}})
       .then((newData)=> {
-        console.log("this is new:", newData)
-        setGame(newData.newGame)
-      })
+        console.log("this is new:")
+        setGame(newData.data.newGame)
+      })}
     }
   }, [listening])
-
-  console.log(game)
+  
+  useEffect(() => {
+    console.log("game:", game)
+  }, [game])
+  
+  // console.log(game)
+    if (gameData && !listening && filterData) { 
+      console.log("gameData HERE")
+      if (gameData.getGame) {
+        setGame(gameData.getGame)
+      }
+        setListening(true)
+    } 
 
   return (
     <Card containerStyle={{height:"95%"}}>
       <Text> Home VS House </Text>
 
       <Card.Divider/>
-    
+{ game &&
+    <View>
       <Text>
         {moment(game.startDate).format('dddd, MMMM Do YYYY')}
         </Text>
@@ -93,7 +105,8 @@ export function GameScreen({route, navigation}) {
       <Text>
         score: {game.score}
       </Text>
-
+      </View>
+   }
       <Card.Divider/>
       
       {/* HOW DO I DO THIS?? */}

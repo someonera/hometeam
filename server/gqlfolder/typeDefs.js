@@ -18,6 +18,7 @@ type Task {
   interval: Int
   id: ID
   startDate: String
+  done: Boolean
 }
 
 type Game {
@@ -34,13 +35,14 @@ type Game {
 input TaskInput {
   taskName: String
   taskWho: String
+  done: Boolean
 }
 
 type Query {
   getUser(name:String!): [User!]
   getAllUsers: [User!]
   getTask(taskName:String!):[Task!]
-  getAllTasks(mon: String, sun: String): [Task!]
+  getAllTasks(mon: String, sun: String, name: String, done: Boolean): [Task!]
   getGame(endDate: String!): Game
 }
 
