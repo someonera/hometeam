@@ -59,7 +59,7 @@ export default function App() {
         <Stack.Screen name="TasksTabs" component={TasksStack} />
         <Stack.Screen name="TeamMates" component={TeamStack} />
         <Stack.Screen name="This Week's Match" component={GameScreen}/>
-        <Stack.Screen name="PastStats" component={StatsScreen}/> 
+        <Stack.Screen name="Stats" component={StatsScreen}/> 
         <Stack.Screen name="GotTheBall" component={GotTheBallScreen}/>
       </Stack.Navigator>
     </NavigationContainer>

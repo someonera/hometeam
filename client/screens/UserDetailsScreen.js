@@ -19,8 +19,6 @@ const GET_USER = gql`
 `;
 
 
-
-
 export function UserDetailsScreen({route, navigation}) {
 
   const userTitle = route.params.name;
@@ -37,6 +35,8 @@ export function UserDetailsScreen({route, navigation}) {
 
         <SafeAreaView>
           <TextInput 
+            style={{fontSize: 50, color: "green",borderColor: "lightgreen", borderWidth: 1}}
+            editable = {true}
             styles={styles.input}
             value={title}
             onChangeText={setTitle}
@@ -49,15 +49,8 @@ export function UserDetailsScreen({route, navigation}) {
         </SafeAreaView>
   
     
-  <Card.Divider/>
-    <View>
-      <Text>User skills: list the tasks this user does  </Text>
-      <Text> and give them an icon based on their level  </Text>
-
-    </View>
-    
     <Button title={"Save Changes"}></Button>
-    <Button title={"Discard Changes"}></Button>
+    <Button title={"Discard Changes"} onPress={() => navigation.navigate("TeamMates")}></Button>
     <Button title={"Delete This User"}/>
 
     </Card>

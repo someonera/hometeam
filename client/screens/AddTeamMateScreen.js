@@ -30,22 +30,29 @@ export function AddTeamMateScreen({route, navigation}) {
 
      
 <Card containerStyle={{height:"95%"}}>
-<Text>Add New Team Mate: </Text>
+<Text style={styles.listItem}>Add New Team Mate: </Text>
+<View style={{height: 40}}></View>
+
 
         <SafeAreaView>
         <TextInput
         editable = {true}
-        style={{height: 40}}
+        style={{fontSize: 50, borderColor: "lightgreen", borderWidth: 1}}
         value = {input}
         onChangeText = {setInput} 
       />
         
   </SafeAreaView>
-  
+  <View style={{height: 50}}></View>
+  <View style={{
+        flexDirection: "row", 
+        justifyContent: "space-around"
+        }}>
+        <Button title={"Add"} onPress={submit}></Button>
+        <Button title={"Discard Changes"} onPress={() => navigation.navigate("TeamMates")}></Button>
+
+      </View>
     
-  <Card.Divider/>
-    <Button title={"Add"} onPress={submit} ></Button>
-    <Button title={"Discard Changes"} onPress={() => navigation.navigate("TeamMates")}></Button>
 
     </Card>
 

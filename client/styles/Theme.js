@@ -15,7 +15,9 @@ export const theme = {
   Button: {
     raised: false,
     buttonStyle: {
-      width: 150
+      width: 150, 
+      // margin: 5, 
+      // padding: 10
     },
     containerStyle: {
       // margin: 2
@@ -35,15 +37,20 @@ export const theme = {
   ListItem: {
     containerStyle:{
       margin: 10,
-      borderRadius: 10
-
-    }
+      borderRadius: 10, 
+      fontSize: 40
+    }, 
+    
   }, 
 
   Card: {
     containerStyle: {
       margin: 10, 
-      borderRadius: 10
+      borderRadius: 10,
+     
+    }, 
+    title: {
+      fontSize: 40
     }
   }, 
 

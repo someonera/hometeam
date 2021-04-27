@@ -4,7 +4,7 @@ import {Card, CheckBox, ListItem} from 'react-native-elements'
 import { gql, useQuery, useMutation } from "@apollo/client";
 import moment from 'moment'
 import CheckBoxComponent from '../components/CheckBoxComponent'
-
+const styles = require('../styles/styles')
 
 // const ALL_TASKS_BY_NAME = gql`
 //   query getAllTasks ($mon: String, $sun: String, $taskWho: String) {
@@ -77,20 +77,20 @@ const thisUser = "Rosie"
 return (
 <Card>
 
-      <Text>You've got the Ball! </Text>
 
 { tasks &&
   
     <View>  
-    <Text>{thisUser} Has {tasks.length} Goals This Week: </Text>
+    <Text style={styles.listItem}>Hey {thisUser}! You have {tasks.length} Goals This Week: </Text>
 
       { tasks.map(({taskName, done}) => (
   
         <ListItem key={taskName}>
-        <Text>{taskName}</Text>
-
+        
         <CheckBoxComponent taskName={taskName} done={done} toggleCheck={toggleCheck}
         />
+
+        <Text style={styles.listItem}>{taskName}</Text>
 
         </ListItem>
       ))

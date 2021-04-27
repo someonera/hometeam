@@ -137,7 +137,7 @@ export function TaskDetailsScreen({route, navigation}) {
 
     <CalendarPicker
       selectedStartDate={taskStartDate}
-      // disabledDates={disableDates}
+      disabledDates={disableDates}
       onDateChange={onDateChange}
     ></CalendarPicker>
 

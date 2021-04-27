@@ -33,10 +33,14 @@ const styles = StyleSheet.create({
     right: 0
   }, 
 
-  thingButton: {
-    position: 'relative', 
-    bottom: 5  
-  }
+  listItem: {
+    fontSize: 25, 
+    color: "#57BF08"
+  }, 
+
+  cardDetail: {
+    fontSize: 20, 
+  }, 
 
 
 

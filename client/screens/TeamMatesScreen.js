@@ -4,7 +4,7 @@ import React, { useEffect, useState, useLayoutEffect } from "react";
 import { ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
 const styles = require("../styles/styles");
 import { gql, useQuery } from "@apollo/client";
-import {Button , Card, FAB} from "react-native-elements";
+import {Button , Card, FAB, ListItem} from "react-native-elements";
 import Icon from "react-native-vector-icons/Feather";
 
 
@@ -42,40 +42,33 @@ export function TeamMatesScreen({routes, navigation}) {
     <View>
     <ScrollView>
       
-    
-
       {data.getAllUsers.map(({name, id, tasks}) => (
-      <Card key={id}>
-          {/* <Icon name="smile" size={30} color="lightgreen" /> */}
-        <Card.Title>
-          {name} 
-        <Button 
-            buttonStyle={{marginLeft: 150}}
-            icon={<Icon name="edit-2"/>}
-            onPress={() => {
-              navigation.navigate("UserDetails", {
-                name: {name}, 
-              });
-            }}
-          />
-        </Card.Title>
-  
-        <Card.Divider/>
-          
-          <Text> {name}'s Skills: </Text>
-          {tasks.map(({taskName}) => (
-            <Text key = {taskName}> {taskName} </Text>
-          ))}
-        
-        <View style={{position:"relative", alignItems:"center"}}> 
+      <ListItem key={id}>
+        <View style={{flexDirection: "row", alignItems:"center", justifyContent: "space-between"}}>
+            <Icon name="user" size={40} color="lightgreen" />
+            <ListItem.Title style={styles.listItem}>
+                {name} 
+            </ListItem.Title>
         </View>
-
-      </Card>
+        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+          <View>
+            <Text style={{fontSize: 20}}> {name}'s Skills: </Text>
+        
+              {tasks.map(({taskName}) => (
+                <Text key = {taskName}> {taskName} </Text>
+                ))}
+           </View>
+          <View>
+    
+                </View>
+           </View>
+      </ListItem>
       ))}
+
     </ScrollView>
 
     <FAB
-        style={styles.fab}
+        // style={styles.fab}
         icon={<Icon name="plus" size={20} color="white"/>}
         title = "ADD NEW"
         onPress={() => {

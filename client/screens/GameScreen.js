@@ -23,6 +23,8 @@ const GET_GAME = gql`
     getGame(endDate: $endDate) {
       gameTasks {
         taskName
+        taskWho
+        done
       }
       id
       startDate
@@ -85,45 +87,52 @@ export function GameScreen({route, navigation}) {
     <Card containerStyle={{height:"95%"}}>
       <Text style={gameStyles.text}>  </Text>
 
-      <Card.Divider/>
     { game &&
       <View>
+        <View style={{
+            flexDirection: "row", 
+            justifyContent: "center"
+          }}>
+        <Text style={{
+          padding: 14, 
+          fontSize: 20
+        }}>
+        {moment(game.startDate).format('dddd, MMMM Do')} - {
+        moment(game.endDate).format('dddd, MMMM Do')}
+        </Text>
+        </View>
 
-      <Text>
-        {moment(game.startDate).format('dddd, MMMM Do YYYY')} - {
-        moment(game.endDate).format('dddd, MMMM Do YYYY')}
-      </Text>
-      <Card.Divider/>
+
 
       <View style={{
             flexDirection: "row", 
+            alignItems: "center",
             justifyContent: "center"
           }}> 
           <View style={{
-            flexDirection: "row", 
+            flexDirection: "column", 
             justifyContent: "space-around"
           }}>
             <Text style={gameStyles.homeTeam}>HOME</Text>
             <Text style={gameStyles.homeScore}>{game.score}</Text>
           </View>
-          <Text style={gameStyles.center}> / </Text>
+          <Text style={gameStyles.center}> : </Text>
           <View style={{
-            flexDirection: "row", 
+            flexDirection: "column", 
             justifyContent: "space-around"
           }}>
             <Text style={gameStyles.awayScore}>{game.gameTasks.length-game.score}</Text>
-            <Text style={gameStyles.awayTeam}>HOUSE </Text>
+
+            <Text style={gameStyles.awayTeam}>AWAY</Text>
+
           </View>
 
-      </View>
+        </View>
 
 
       </View>
+
    }
-      <Card.Divider/>
-      
-
-    <Card.Divider/>
 
     </Card>
   )
@@ -134,29 +143,34 @@ const gameStyles = StyleSheet.create({
     fontSize: 40
   }, 
   homeScore: {
-    fontSize: 70, 
+    fontSize: 100, 
     color: "white",
     backgroundColor: "lightgreen",
     padding: 25
   }, 
   awayScore: {
-    fontSize: 70, 
+    fontSize: 100, 
     color: "white",
     backgroundColor: "#f5425d", 
     padding: 25,
   }, 
   center: {
-    fontSize: 70, 
+    fontSize: 100, 
     color: "black", 
     padding: 1, 
-    margin: 1
+    margin: 1, 
+    color: "grey"
   }, 
   homeTeam: {
     color: "lightgreen", 
-    padding: 20
+    padding: 10, 
+    fontSize:30,
+    fontWeight: "bold"
   }, 
   awayTeam: {
     color: "#f5425d", 
-    padding: 20
+    padding: 10,
+    fontSize: 30, 
+    fontWeight: "bold", 
   }
 })

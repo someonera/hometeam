@@ -16,16 +16,54 @@ export function HomeScreen({navigation, route}) {
 
   return (
     <View>
+      <ListItem 
+        Component={TouchableOpacity}
+        onPress={() => {
+          navigation.navigate("This Week's Match")
+        }}
+      >
+      <Icon name="calendar" size={80} color="lightgreen"/>
+        <ListItem.Content>
+          <ListItem.Title style={styles.listItem}>
+            Match of The Week
+          </ListItem.Title>
+          <ListItem.Subtitle>
+            This Week's Match
+          </ListItem.Subtitle>
+        </ListItem.Content>
+
+      </ListItem>
+
+
+
+      <ListItem
+        Component={TouchableOpacity}
+        onPress={() => {
+          navigation.navigate("GotTheBall")
+        }}
+      >
+
+      <Icon name="dribbble" size={80} color="lightgreen"/>
+        <ListItem.Content>
+          <ListItem.Title style={styles.listItem}>
+            You've Got The Ball!
+          </ListItem.Title>
+          <ListItem.Subtitle>
+             Your Tasks This Week
+          </ListItem.Subtitle>
+        </ListItem.Content>
+
+      </ListItem>
       <ListItem
           Component={TouchableHighlight}
           onPress={() => {
           navigation.navigate("TeamMates");
         }}
       >
-        <Icon name="user" size={50} color="lightgreen"/>
+        <Icon name="user" size={80} color="lightgreen"/>
 
         <ListItem.Content>
-          <ListItem.Title>
+          <ListItem.Title style={styles.listItem}>
             TeamMates
           </ListItem.Title>
           <ListItem.Subtitle>
@@ -40,34 +78,16 @@ export function HomeScreen({navigation, route}) {
         onPress={() => {
           navigation.navigate("TasksTabs");
         }} color="1ACDA5#" > 
-        <Icon name="dribbble" size={50} color="lightgreen"/>
+        <Icon name="check-circle" size={80} color="lightgreen"/>
         <ListItem.Content>
-          <ListItem.Title>
+          <ListItem.Title style={styles.listItem}>
             Our Goals
           </ListItem.Title>
 
           <ListItem.Subtitle>
-            Add and Edit Your Team Goals
+            Add and Schedule Goals
           </ListItem.Subtitle>
         </ListItem.Content>
-      </ListItem>
-
-      <ListItem
-        Component={TouchableOpacity}
-        onPress={() => {
-          navigation.navigate("This Week's Match")
-        }}
-      >
-      <Icon name="eye" size={50} color="lightgreen"/>
-        <ListItem.Content>
-          <ListItem.Title>
-            This Week's Match
-          </ListItem.Title>
-          <ListItem.Subtitle>
-            This Week's Match
-          </ListItem.Subtitle>
-        </ListItem.Content>
-
       </ListItem>
 
 
@@ -77,32 +97,13 @@ export function HomeScreen({navigation, route}) {
           navigation.navigate("Stats")
         }}
       >
-      <Icon name="eye" size={50} color="lightgreen"/>
+      <Icon name="award" size={80} color="lightgreen"/>
         <ListItem.Content>
-          <ListItem.Title>
-            Stats!
+          <ListItem.Title style={styles.listItem}>
+            Past Matches
           </ListItem.Title>
           <ListItem.Subtitle>
-            See Past Stats
-          </ListItem.Subtitle>
-        </ListItem.Content>
-
-      </ListItem>
-
-      <ListItem
-        Component={TouchableOpacity}
-        onPress={() => {
-          navigation.navigate("GotTheBall")
-        }}
-      >
-
-      <Icon name="dribbble" size={50} color="lightgreen"/>
-        <ListItem.Content>
-          <ListItem.Title>
-            I've Got The Ball
-          </ListItem.Title>
-          <ListItem.Subtitle>
-             My Tasks This Week
+            See Your Team History
           </ListItem.Subtitle>
         </ListItem.Content>
 

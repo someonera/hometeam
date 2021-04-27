@@ -62,6 +62,16 @@ const resolvers = {
     } catch (err) {
       console.log(err)
     };
+  }, 
+
+  getAllPastGames: async(obj, args) => {
+    try {
+      const allGames = await Game.find({})
+      const result = allGames.filter(item => item.endDate !== args.endDate)
+      return result
+    } catch (err) {
+      console.log(err)
+    }
   }
 },
 
@@ -217,10 +227,15 @@ const resolvers = {
         console.log(err)
       }
 
-    }
+    }, 
+
+    
 
   }
 }; 
 
 
 module.exports = resolvers;
+
+
+
