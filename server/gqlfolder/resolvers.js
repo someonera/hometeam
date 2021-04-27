@@ -55,14 +55,13 @@ const resolvers = {
   getGame: async (obj, args) => {
     try {
       // console.log(args.endDate)
-
+      // console.log(args)
       const thisGame = await Game.findOne({endDate: args.endDate})
-
       return thisGame
 
     } catch (err) {
       console.log(err)
-    }
+    };
   }
 },
 
@@ -195,6 +194,33 @@ const resolvers = {
         console.log(err)
       }
     }, 
+
+    checkTask: async (obj, args) => {
+      try {
+        console.log(args)
+        const game = await Game.findOne({endDate: args.endDate})
+        console.log(game.score)
+        let toggle
+        let scoreUpdate = game.score
+        const editTasks = game.gameTasks.map((item) => {
+          if (item.taskName === args.taskName) {
+            toggle = !item.done
+            item.done = !item.done
+            if (toggle === true) {
+              scoreUpdate++
+            } else (scoreUpdate--)
+          }
+            return item
+          })
+        
+        await Game.findByIdAndUpdate(game.id, {gameTasks: editTasks, score: scoreUpdate})
+        return toggle
+      } catch (err) {
+        console.log(err)
+      }
+
+    }
+
   }
 }; 
 

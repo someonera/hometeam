@@ -3,17 +3,38 @@ import {Text, View} from 'react-native'
 import {Card, CheckBox} from 'react-native-elements'
 import { gql, useQuery, useMutation } from "@apollo/client";
 import moment from 'moment'
+import CheckBoxComponent from '../components/CheckBoxComponent'
 
 
+// const ALL_TASKS_BY_NAME = gql`
+//   query getAllTasks ($mon: String, $sun: String, $taskWho: String) {
+//     getAllTasks (mon: $mon, sun: $sun, taskWho: $taskWho) {
+//       taskName
+//       taskWho
+//       done
+//     }
+//   }
+// `
 
-const ALL_TASKS_BY_NAME = gql`
-  query getAllTasks ($mon: String, $sun: String, $taskWho: String) {
-    getAllTasks (mon: $mon, sun: $sun, taskWho: $taskWho) {
-      taskName
-      taskWho
-      done
+const GET_GAME_WITH_FILTERED_TASKS=gql`
+  query getGame($endDate: String!) {
+    getGame(endDate: $endDate) {
+      gameTasks {
+        taskName
+        taskWho
+        done
+        }
+    startDate
+    endDate
     }
   }
+`
+
+const CHECK_UNCHECK = gql`
+  mutation checkTask($taskName: String!, $endDate: String!) {
+    checkTask(taskName: $taskName, endDate: $endDate) 
+  }
+
 `
 
 // do a query on the CURRENT GAME to show ALL THE TASKS for this week 
@@ -26,29 +47,47 @@ const ALL_TASKS_BY_NAME = gql`
 // which you can manipulate here. 
 
 export function GotTheBallScreen({route, navigation}) {
+  
 
-const {loading, error, data} = useQuery(ALL_TASKS_BY_NAME, {variables: {
-  mon: moment().startOf('isoWeek'), 
-  sun: moment().endOf('isoWeek'), 
-  taskWho: "Rosie"
-}})
+  const endOfWeek = moment().endOf('isoWeek')
+  const {loading, error, data} = useQuery(GET_GAME_WITH_FILTERED_TASKS, {variables: {endDate: endOfWeek
+  }}) 
+  
+const [checkUncheck, {loading: checkLoading, error: checkError, data: checkData}] = useMutation(CHECK_UNCHECK)
 
-  console.log(data)
+if (checkLoading) return <Text>"loading"</Text>
+if (checkError) return <Text>{checkError}</Text>
+
+if (loading) return <Text>"loading"</Text>
+if (error) return <Text>{error}</Text>
+
+const thisUser = "Amalia"
+
+const tasksFilteredByName = data.getGame.gameTasks.filter(item => item.taskWho === thisUser)
+
+
 return (
     <Card>
 
-      
-      <Text>I've got the Ball! </Text>
-      {data.getAllTasks.map(({done, taskName}) => (
+      <Text>You've got the Ball! </Text>
+      <Text>{thisUser} Has {tasksFilteredByName.length} Shots This Week: </Text>
 
-        <View flexDirection={"row"}>
-        <Text>{taskName}</Text>
-        <CheckBox></CheckBox>
+{ tasksFilteredByName &&
+    <View>  
+      { tasksFilteredByName.map(({taskName, done}) => (
+        <View key={taskName}>
+      
+        <CheckBoxComponent key={taskName} done={done} taskName={taskName} checkUncheck={checkUncheck}/>
+
+
+
         </View>
-      ))}
-      
-  
+      ))
 
+      }
+  
+    </View>     
+} 
 
     </Card>
   )

@@ -61,7 +61,7 @@ type Mutation {
 
   newGame(startDate: String!, endDate: String!, gameTasks: [TaskInput]): Game! 
 
-
+  checkTask(taskName: String!, endDate: String!): Boolean
 
   }
 `;
