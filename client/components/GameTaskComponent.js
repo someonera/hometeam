@@ -1,15 +1,14 @@
-import React, { useEffect }from 'react'
-import {Text, View} from 'react-native'
+import React, { useEffect }from "react";
+import {Text, View} from "react-native";
 
 export default function GameTaskComponent (props) {
 
-  const {game} = props
-  console.log(game)
+  const {game} = props;
 
   useEffect(() => {
     
 
-  }, [game])
+  }, [game]);
 
   return (
     
@@ -21,6 +20,6 @@ export default function GameTaskComponent (props) {
 
     </View>
 
-)
+);
 
 }

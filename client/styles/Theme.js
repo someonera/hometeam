@@ -1,60 +1,46 @@
-
-import {TouchableHighlight} from "react-native";
-
 export const theme = {
   colors: {
-    primary: "lightgreen", 
-    secondary: "#f5425d"
-  }, 
-  CheckBox: {
-    checkedColor: "#f5425d", 
-    size: 50
+    primary: "lightgreen",
+    secondary: "#f5425d",
   },
-
+  CheckBox: {
+    checkedColor: "#f5425d",
+    size: 50,
+  },
 
   Button: {
     raised: false,
     buttonStyle: {
-      width: 150, 
-      // margin: 5, 
-      // padding: 10
+      width: 150,
     },
-    containerStyle: {
-      // margin: 2
-    }, 
+    containerStyle: {},
     titleStyle: {
       fontSize: 15,
-      fontWeight: "bold"
-    }
+      fontWeight: "bold",
+    },
   },
 
   Header: {
     headerStyle: {
-      backgroundColor: "pink"
-    }
-  }, 
+      backgroundColor: "pink",
+    },
+  },
 
   ListItem: {
-    containerStyle:{
+    containerStyle: {
       margin: 10,
-      borderRadius: 10, 
-      fontSize: 40
-    }, 
-    
-  }, 
+      borderRadius: 10,
+      fontSize: 40,
+    },
+  },
 
   Card: {
     containerStyle: {
-      margin: 10, 
+      margin: 10,
       borderRadius: 10,
-     
-    }, 
+    },
     title: {
-      fontSize: 40
-    }
-  }, 
-
-
-
-
+      fontSize: 40,
+    },
+  },
 };
