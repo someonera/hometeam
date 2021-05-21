@@ -22,38 +22,6 @@ const resolvers = {
       }
     },
 
-    getTask: async (obj, args) => {
-      try {
-        const gotTask = await Task.find({ taskName: args.taskName });
-        return gotTask;
-      } catch (err) {
-        console.log(err);
-      }
-    },
-
-    getAllTasks: async (obj, args) => {
-      try {
-        if (args.mon && args.sun && !args.taskWho) {
-          const unfiltered = await Task.find({});
-          const filtered = unfiltered.filter(
-            (task) => (task.startDate > args.mon) & (task.startDate < args.sun)
-          );
-          return filtered;
-        } else if (args.mon && args.sun && args.taskWho) {
-          const all = await Task.find({});
-          const filteredByName = all.filter(
-            (task) => task.taskWho === args.taskWho
-          );
-          return filteredByName;
-        } else {
-          allTasks = await Task.find({});
-          return allTasks;
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    },
-
     getGame: async (obj, args) => {
       try {
         const thisGame = await Game.findOne({ endDate: args.endDate });
@@ -189,9 +157,6 @@ const resolvers = {
     },
 
     newGame: async (obj, args) => {
-      // find all the tasks where the names are equal to the names of the taskwho
-      // in the args input
-
       try {
         const arrayOfTasks = [];
         for (const item of args.gameTasks) {
