@@ -1,60 +1,8 @@
-const { User, Task, Game } = require("../db/schemas");
-// const Task  = require('../db/schemas')
-const moment = require("moment");
+import { Task, Game, User } from "../../db/schemas.js";
+import moment from "moment";
 
-const resolvers = {
-  Query: {
-    getUser: async (obj, args) => {
-      try {
-        const gotUser = await User.find({ name: args.name });
-        return gotUser;
-      } catch (err) {
-        console.log(err);
-      }
-    },
-
-    getAllUsers: async (obj) => {
-      try {
-        const allUsers = await User.find({});
-        return allUsers;
-      } catch (err) {
-        console.log(err);
-      }
-    },
-
-    getGame: async (obj, args) => {
-      try {
-        const thisGame = await Game.findOne({ endDate: args.endDate });
-        return thisGame;
-      } catch (err) {
-        console.log(err);
-      }
-    },
-
-    getAllPastGames: async (obj, args) => {
-      try {
-        const allGames = await Game.find({});
-        const result = allGames.filter((item) => item.endDate !== args.endDate);
-        return result;
-      } catch (err) {
-        console.log(err);
-      }
-    },
-  },
-
+export const resolvers = {
   Mutation: {
-    addUser: async (obj, args) => {
-      try {
-        const userCheck = await User.findOne({ name: args.name });
-        if (!userCheck) {
-          const addedUser = await User.create({ name: args.name });
-          return addedUser;
-        }
-        return userCheck;
-      } catch (err) {
-        return err;
-      }
-    },
     addTask: async (obj, args) => {
       try {
         const nextSunday = moment(args.startDate).endOf("isoWeek");
@@ -155,58 +103,5 @@ const resolvers = {
         console.log(err);
       }
     },
-
-    newGame: async (obj, args) => {
-      try {
-        const arrayOfTasks = [];
-        for (const item of args.gameTasks) {
-          const waitingTask = await Task.findOne({ taskName: item.taskName });
-          arrayOfTasks.push(waitingTask);
-        }
-
-        const gameCheck = await Game.findOne({ startDate: args.startDate });
-        if (!gameCheck) {
-          const newGame = await Game.create({
-            startDate: args.startDate,
-            endDate: args.endDate,
-            score: 0,
-            gameTasks: arrayOfTasks,
-          });
-          return newGame;
-        } else {
-          return gameCheck;
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    },
-
-    checkTask: async (obj, args) => {
-      try {
-        const game = await Game.findOne({ endDate: args.endDate });
-        let toggle;
-        let scoreUpdate = game.score;
-        const editTasks = game.gameTasks.map((item) => {
-          if (item.taskName === args.taskName) {
-            toggle = !item.done;
-            item.done = !item.done;
-            if (toggle === true) {
-              scoreUpdate++;
-            } else scoreUpdate--;
-          }
-          return item;
-        });
-
-        await Game.findByIdAndUpdate(game.id, {
-          gameTasks: editTasks,
-          score: scoreUpdate,
-        });
-        return toggle;
-      } catch (err) {
-        console.log(err);
-      }
-    },
   },
 };
-
-module.exports = resolvers;

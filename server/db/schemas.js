@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const db = require("./db");
+import mongoose from "mongoose";
+import { db } from "./db.js";
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -28,8 +28,6 @@ const gameSchema = new mongoose.Schema({
   notDoneTasks: Array,
 });
 
-const User = db.model("users", userSchema);
-const Task = db.model("tasks", taskSchema);
-const Game = db.model("games", gameSchema);
-
-module.exports = { User, Task, Game };
+export const User = db.model("users", userSchema);
+export const Task = db.model("tasks", taskSchema);
+export const Game = db.model("games", gameSchema);

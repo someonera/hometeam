@@ -1,9 +1,8 @@
-const { ApolloServer, gql } = require("apollo-server");
+import { ApolloServer } from "apollo-server";
 
-const typeDefs = require("./gqlfolder/typeDefs");
-const resolvers = require("./gqlfolder/resolvers");
+import { schema } from "./gqlfolder/Schema/index.js";
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ schema });
 
 server.listen().then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
