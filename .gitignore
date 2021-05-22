@@ -27,7 +27,7 @@ node_modules
 
 # Custom
 .expo
-client/pretendexpo
+client/.expo
 .expo-shared
 private
 build
