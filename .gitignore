@@ -26,7 +26,9 @@ node_modules
 .node_repl_history
 
 # Custom
-ignore
+.expo
+client/pretendexpo
+.expo-shared
 private
 build
 dist
