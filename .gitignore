@@ -28,8 +28,8 @@ node_modules
 # Custom
 .expo
 client/.expo
-client/node-___
-server/node-___
+client/node-modules
+server/node-modules
 .expo-shared
 private
 build
