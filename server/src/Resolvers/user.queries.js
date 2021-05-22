@@ -1,4 +1,4 @@
-import { User } from "../../db/schemas.js";
+import { User } from "../Models/types.js";
 
 export const resolvers = {
   Query: {

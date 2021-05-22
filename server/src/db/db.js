@@ -1,5 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import mongoose from "mongoose";
-mongoose.connect("mongodb://localhost:27017/hometeam", {
+mongoose.connect(`mongodb://localhost:${process.env.PORT}/hometeam`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

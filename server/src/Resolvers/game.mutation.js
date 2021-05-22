@@ -1,4 +1,4 @@
-import { Game, Task } from "../../db/schemas.js";
+import { Game, Task } from "../Models/types.js";
 
 export const resolvers = {
   Mutation: {

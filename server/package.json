@@ -13,6 +13,7 @@
     "@graphql-tools/merge": "^6.2.14",
     "@graphql-tools/schema": "^7.1.5",
     "apollo-server": "^2.23.0",
+    "dotenv": "^10.0.0",
     "graphql": "^15.5.0",
     "graphql-tools": "^4.0.8",
     "lodash": "^4.17.21",

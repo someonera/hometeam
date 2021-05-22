@@ -1,4 +1,4 @@
-import { Game } from "../../db/schemas.js";
+import { Game } from "../Models/types.js";
 
 export const resolvers = {
   Query: {

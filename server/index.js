@@ -1,6 +1,6 @@
 import { ApolloServer } from "apollo-server";
 
-import { schema } from "./gqlfolder/Schema/index.js";
+import { schema } from "./src/Schema/index.js";
 
 const server = new ApolloServer({ schema });
 

@@ -1,4 +1,4 @@
-import { Task, Game, User } from "../../db/schemas.js";
+import { Task, Game, User } from "../Models/types.js";
 import moment from "moment";
 
 export const resolvers = {

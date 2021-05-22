@@ -1,8 +1,7 @@
-import { AppRegistry} from 'react-native';
+import { AppRegistry } from "react-native";
 
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 
-const { App } = require('./App')
+import { App } from "./App";
 
-
-AppRegistry.registerComponent(HomeTeam, () => App)
+AppRegistry.registerComponent(HomeTeam, () => App);

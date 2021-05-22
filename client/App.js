@@ -1,28 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import "react-native-gesture-handler";
-
+import { APOLLO_CLIENT_HOST, APOLLO_CLIENT_PORT } from "@env";
+import { useFonts } from "expo-font";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
-import { ThemeProvider, Button } from "react-native-elements";
-const { theme } = require("./styles/Theme");
+import { ThemeProvider } from "react-native-elements";
+import { theme } from "./src/styles/Theme";
 
-const { HomeScreen } = require("./screens/HomeScreen");
-const { TasksScreen } = require("./screens/TasksScreen");
-const { TeamMatesScreen } = require("./screens/TeamMatesScreen");
-const { AddTeamMateScreen } = require("./screens/AddTeamMateScreen");
-const { TaskDetailsScreen } = require("./screens/TaskDetailsScreen");
-const { UserDetailsScreen } = require("./screens/UserDetailsScreen");
-const { GameScreen } = require("./screens/GameScreen");
-const { StatsScreen } = require("./screens/StatsScreen");
-const { GotTheBallScreen } = require("./screens/GotTheBallScreen");
+import { HomeScreen } from "./src/screens/HomeScreen";
+import { TasksScreen } from "./src/screens/TasksScreen";
+import { TeamMatesScreen } from "./src/screens/TeamMatesScreen";
+import { AddTeamMateScreen } from "./src/screens/AddTeamMateScreen";
+import { TaskDetailsScreen } from "./src/screens/TaskDetailsScreen";
+import { UserDetailsScreen } from "./src/screens/UserDetailsScreen";
+import { GameScreen } from "./src/screens/GameScreen";
+import { StatsScreen } from "./src/screens/StatsScreen";
+import { GotTheBallScreen } from "./src/screens/GotTheBallScreen";
 
-const { screenOptions } = require("./styles/headerstyles");
+import { screenOptions } from "./src/styles/headerstyles";
 
 const client = new ApolloClient({
-  uri: "http://192.168.1.124:4000",
+  uri: `${process.env.APOLLO_CLIENT_HOST}${process.env.APOLLO_CLIENT_PORT}`,
 });
 
 const Stack = createStackNavigator();

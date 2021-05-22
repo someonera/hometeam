@@ -1,4 +1,4 @@
-import { Task } from "../../db/schemas.js";
+import { Task } from "../Models/types.js";
 
 export const resolvers = {
   Query: {
