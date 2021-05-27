@@ -57,7 +57,7 @@ Run `node index.js` from server/src
 
 
 ## Built By
- <img src="https://avatars.githubusercontent.com/u/74319526?v=4" width="70" alt="Ro" /> 
+| <img src="https://avatars.githubusercontent.com/u/74319526?v=4" width="70" alt="Ro" /> 
 --- | 
 **Ro Thomas** 
 [LinkedIn](https://www.linkedin.com/in/romthomas/)
