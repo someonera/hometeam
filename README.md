@@ -49,9 +49,7 @@ Run `node index.js` from server/src
 
 ### Setting up the frontend
 
-* There are two environment variables to set up on the frontend: APOLLO_CLIENT_HOST and APOLLO_CLIENT_PORT (which should be the same as PORT on the backend). 
-
-* Install [Expo](https://expo.io/) then you can run ipconfig getifaddr en0 in the terminal to find out your IP address to run the app on expo on your phone. See .env.example.
+* There are two environment variables to set up on the frontend: APOLLO_CLIENT_HOST and APOLLO_CLIENT_PORT (which should be the same as PORT on the backend). Install [Expo](https://expo.io/) and run `ipconfig getifaddr en0` in the terminal to find out your IP address to run the app on expo on your phone - see .env.example.
 
 * Run `npm run start-dev` in client/src
 
