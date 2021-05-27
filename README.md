@@ -1,10 +1,11 @@
-# HomeTeam: don't let the house win!
+# HomeTeam: your house doesn't have to win!
 
 ## The app 
 HomeTeam is a fun task-management app for families and housemates - uniting you against your true enemy, mess!
 Create your team's tasks, assign them a date and a user, and the app will generate a weekly game with each task representing a shot on goal for the whole team. Any tasks left undone count as goals for the opposing team - your house.
 
 <code><img alt="React Native" src="https://img.shields.io/badge/-React%20Native-61dafb?logo=react&logoColor=white&style=for-the-badge"></code>
+<code><img alt="Expo" src="https://img.shields.io/badge/-expo-000020?logo=expo&logoColor=white&style=for-the-badge"></code>
 <code><img alt="CSS3" src="https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white&style=for-the-badge"></code>
 <code><img alt="GraphQL" src="https://img.shields.io/badge/-GraphQL-e434aa?logo=graphql&logoColor=white&style=for-the-badge"></code>
 <code><img alt="Apollo GraphQL" src="https://img.shields.io/badge/-Apollo%20GraphQL-311c87?logo=apollo-graphql&logoColor=white&style=for-the-badge"></code>
@@ -14,7 +15,9 @@ Create your team's tasks, assign them a date and a user, and the app will genera
 
 # Features
 
-Currently, HomeTeam allows unlimited tasks to be added, given a start date and an interval, and allocated to a single member of the team. Each user sees their tasks for that week in their "You've got the ball!" screen, allowing children (or adults) to easily manage and understand what their responsibilities are at any time. A new game is generated each week where the current status of the game underway is shown, and previous games and scores can be also be explored.
+HomeTeam allows unlimited tasks to be added, given a start date and an interval, and allocated to a single member of the team. 
+
+Each user sees their tasks for that week in their "You've got the ball!" screen, allowing children (or adults) to easily manage and understand what their responsibilities are at any time. A new game is generated each week where the current status of the game underway is shown, and previous games and scores can be also be explored.
 
 # Tech Stack
 
