@@ -1,7 +1,11 @@
-# hometeam
+# HomeTeam: don't let the house win!
 
-Chore management app for families and housemates - uniting you against your true enemy, mess!
-Generates a weekly game based on repeating tasks allocated to specific users; each task is a shot on goal for the team member. Any tasks left undone count as goals for the opposing team, aka, your house.
+## The app 
+HomeTeam is a fun task-management app for families and housemates - uniting you against your true enemy, mess!
+Create your team's tasks, assign them a date and a user, and the app will generate a weekly game with each task representing a shot on goal for the whole team. Any tasks left undone count as goals for the opposing team - your house.
+
+<code><img alt="React Native" src="https://img.shields.io/badge/-React%20Native-3178C6?logo=react-native&logoColor=white&style=for-the-badge"></code>
+
 
 # Features
 
