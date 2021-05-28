@@ -43,9 +43,9 @@ To get up and running it’s first necessary to install all dependencies.
 
 ### Running the server
 
-PORT is the only environment variable needed on the backend. Create a .env file in the server folder and store your port number there. See .env.example.
+* PORT is the only environment variable needed on the backend. Create a .env file in the server folder and store your port number there. See .env.example.
 
-Run `node index.js` from server/src
+* Run `node index.js` from server/src
 
 ### Setting up the frontend
 
